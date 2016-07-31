@@ -19,5 +19,10 @@ guo_hall = cv_algorithms.guo_hall(imgThresh)
 # ... or allow the library to modify the original image (= faster):
 # cv_algorithms.guo_hall_inplace(imgThresh, auto_bgr2gray=True)
 
+# Alternate algorithm (but very similar)
+# Only slight differences in the output!
+zhang_suen = cv_algorithms.zhang_suen(imgThresh)
+
 # Write to file so you can see what's been done
 cv2.imwrite("guo-hall-result.png", guo_hall)
+cv2.imwrite("zhang-suen-result.png", zhang_suen)

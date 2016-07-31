@@ -10,8 +10,9 @@ Most implementations are written in optimized C code. The C code is accessed usi
 Currently implemented: 
  
  - Guo-Hall thinning
+ - Zhang-Suen thinning
 
-As `cv2` represents images as `numpy` arrays, most algorithms generically work with numpy arrays.
+As `cv2` represents images as [`numpy`](http://www.numpy.org/) arrays, most algorithms generically work with numpy arrays.
 
 Installation
 ============
@@ -19,6 +20,6 @@ Installation
 Contributions
 ============
 
-Contributions of any shape or form are welcome. Please submit a pull request.
+Contributions of any shape or form are welcome. Please submit a pull request or file an issue on GitHub.
 
 Copyright (c) 2016 Uli Köhler <ukoehler@techoverflow.net>

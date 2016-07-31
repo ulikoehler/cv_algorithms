@@ -8,6 +8,7 @@
 //Forward declaration required due to CFFI's requirement to have unmangled symbols
 extern "C" {
 	int guo_hall_thinning(uint8_t* binary_image, size_t width, size_t height);
+	int zhang_suen_thinning(uint8_t* binary_image, size_t width, size_t height);
 }
 
 /** 
@@ -43,8 +44,7 @@ int guo_hall_iteration(uint8_t* img, uint8_t* mask, size_t width, size_t height,
 	 * we compute the mask in an inverted way so we don't have to invert while performing
 	 * the AND.
 	 */
-
-	unsigned int changed = 0;
+	int changed = 0;
 	for (unsigned int y = 1; y < height - 1; y++) {
 		for (unsigned int x = 1; x < width - 1; x++) {
 			if(IMG_XY(img, x, y) == 0) continue;
@@ -80,9 +80,51 @@ int guo_hall_iteration(uint8_t* img, uint8_t* mask, size_t width, size_t height,
 	return changed;
 }
 
+
 /**
- * Main Guo-Hall thinning function (slightly optimized).
- * See guo_hall_iteration() for the main documentation.
+ * Performs a single iteration of the Zhang-Suen algorithm.
+ * See http://opencv-code.com/quick-tips/implementation-of-thinning-algorithm-in-opencv/
+ * and the original paper https://dx.doi.org/10.1145/357994.358023 for details.
+ * 
+ * This function is very similar to the Guo-Hall algorithm. See guo_hall_iteration() for more implementation details
+ */
+int zhang_suen_iteration(uint8_t* img, uint8_t* mask, size_t width, size_t height, bool oddIteration) {
+
+	int changed = 0;
+	for (unsigned int y = 1; y < height - 1; y++) {
+		for (unsigned int x = 1; x < width - 1; x++) {
+			if(IMG_XY(img, x, y) == 0) continue;
+			// In the Guo-Hall paper, figure 1 lists which Px corresponds to which coordinate
+			bool p2 = IMG_XY(img, x, y - 1);
+			bool p3 = IMG_XY(img, x + 1, y - 1);
+			bool p4 = IMG_XY(img, x + 1, y);
+			bool p5 = IMG_XY(img, x + 1, y + 1);
+			bool p6 = IMG_XY(img, x, y + 1);
+			bool p7 = IMG_XY(img, x - 1, y + 1);
+			bool p8 = IMG_XY(img, x - 1, y);
+			bool p9 = IMG_XY(img, x - 1, y - 1);
+
+			int A  = (p2 == 0 && p3 == 1) + (p3 == 0 && p4 == 1) + 
+                     (p4 == 0 && p5 == 1) + (p5 == 0 && p6 == 1) + 
+                     (p6 == 0 && p7 == 1) + (p7 == 0 && p8 == 1) +
+                     (p8 == 0 && p9 == 1) + (p9 == 0 && p2 == 1);
+            int B  = p2 + p3 + p4 + p5 + p6 + p7 + p8 + p9;
+            int m1 = oddIteration ? (p2 * p4 * p8) : (p2 * p4 * p6);
+            int m2 = oddIteration ? (p2 * p6 * p8) : (p4 * p6 * p8);
+
+			if (A == 1 && (B >= 2 && B <= 6) && m1 == 0 && m2 == 0)   {
+				IMG_XY(mask, x, y) = 0; //Inverted mask!
+				changed++;
+			}
+		}
+	}
+	bitwiseANDInPlace(img, mask, width * height);
+	return changed;
+}
+
+/**
+ * Main Guo-Hall thinning function (optimized).
+ * See guo_hall_iteration() for more documentation.
  */
 int guo_hall_thinning(uint8_t* binary_image, size_t width, size_t height) {
 	/* return -1 if we can't allocate the memory for the mask, else 0 */
@@ -110,3 +152,33 @@ int guo_hall_thinning(uint8_t* binary_image, size_t width, size_t height) {
 	return 0;
 }
 
+
+/**
+ * Main Zhang-Suen thinning function (optimized).
+ * See guo_hall_thinning() for more documentation.
+ */
+int zhang_suen_thinning(uint8_t* binary_image, size_t width, size_t height) {
+	/* return -1 if we can't allocate the memory for the mask, else 0 */
+	uint8_t* mask = (uint8_t*) malloc(width * height);
+	if (mask == NULL) {
+		return -1;
+	}
+
+	/**
+	 * It is important to understand that with Guo-Hall black pixels will never get white.
+	 * Therefore we don't need to reset the mask in each iteration.
+	 * Especially for large images, this saves us many Mibibytes of memory transfer.
+	 */
+	memset(mask, UCHAR_MAX, width*height);
+
+	int changed;
+	do {
+		changed =
+			zhang_suen_iteration(binary_image, mask, width, height, false) +
+		    zhang_suen_iteration(binary_image, mask, width, height, true);
+	} while (changed != 0);
+
+	//Cleanup
+	free(mask);
+	return 0;
+}
