@@ -36,14 +36,13 @@ void bitwiseANDInPlace(uint8_t* a, const uint8_t* b, size_t size) {
  * changes during the iteration in order to avoid the cv::absdiff() call and the
  * super-expensive whole-image (possibly multi-Mibibyte) copy to prev.
  */
-int guo_hall_iteration(uint8_t* img, uint8_t* mask, size_t width, size_t height, int iteration) {
+int guo_hall_iteration(uint8_t* img, uint8_t* mask, size_t width, size_t height, bool oddIteration) {
 	/** 
 	 * Compared to
 	 * http://opencv-code.com/quick-tips/implementation-of-guo-hall-thinning-algorithm/
 	 * we compute the mask in an inverted way so we don't have to invert while performing
 	 * the AND.
 	 */
-	memset(mask, UCHAR_MAX, width * height);
 
 	unsigned int changed = 0;
 	for (unsigned int y = 1; y < height - 1; y++) {
@@ -63,8 +62,8 @@ int guo_hall_iteration(uint8_t* img, uint8_t* mask, size_t width, size_t height,
 			unsigned int N2 = (p2 || p3) + (p4 || p5) + (p6 || p7) + (p8 || p9);
 			unsigned int N = N1 < N2 ? N1 : N2;
 			unsigned int m = 
-				iteration == 0 ? (p8 && (p6 || p7 || !p9))
-							   : (p4 && (p2 || p3 || !p5));
+				oddIteration ? (p8 && (p6 || p7 || !p9))
+						     : (p4 && (p2 || p3 || !p5));
 			unsigned int C =
 				((!p2 && (p3 || p4)) +
 				 (!p4 && (p5 || p6)) +
@@ -92,13 +91,18 @@ int guo_hall_thinning(uint8_t* binary_image, size_t width, size_t height) {
 		return -1;
 	}
 
+	/**
+	 * It is important to understand that with Guo-Hall black pixels will never get white.
+	 * Therefore we don't need to reset the mask in each iteration.
+	 * Especially for large images, this saves us many Mibibytes of memory transfer.
+	 */
 	memset(mask, UCHAR_MAX, width*height);
 
 	int changed;
 	do {
 		changed =
-			guo_hall_iteration(binary_image, mask, width, height, 0) +
-		    guo_hall_iteration(binary_image, mask, width, height, 1);
+			guo_hall_iteration(binary_image, mask, width, height, false) +
+		    guo_hall_iteration(binary_image, mask, width, height, true);
 	} while (changed != 0);
 
 	//Cleanup
