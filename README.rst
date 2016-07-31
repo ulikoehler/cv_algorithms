@@ -5,14 +5,14 @@ cv_algorithms
 A Python package (Python3 ready!) that contains implementations of various OpenCV algorithms are are not
 available in OpenCV or OpenCV-contrib. This package is intended to be used with OpenCV 3.
 
-Most implementations are written in optimized C code. The C code is accessed using [cffi](https://cffi.readthedocs.io/en/latest/).
+Most implementations are written in optimized C code. The C code is accessed using `cffi <https://cffi.readthedocs.io/en/latest/>`_.
 
 Currently implemented: 
  
  - Guo-Hall thinning
  - Zhang-Suen thinning
 
-As `cv2` represents images as [`numpy`](http://www.numpy.org/) arrays, most algorithms generically work with numpy arrays.
+As `cv2` represents images as `numpy <http://www.numpy.org/>`_ arrays, most algorithms generically work with numpy arrays.
 
 Installation
 ============
@@ -28,9 +28,9 @@ Installation
 Usage
 =====
 
-[Full thinning example](https://github.com/ulikoehler/cv_algorithms/blob/master/examples/thinning.py)
+`Full thinning example <https://github.com/ulikoehler/cv_algorithms/blob/master/examples/thinning.py>`_
 
-.. code-block: python
+.. code-block:: python
 
     import cv_algorithms
     # img must be a binary, single-channel (grayscale) image.
