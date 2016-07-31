@@ -1,0 +1,28 @@
+#!/usr/bin/env python
+import os
+import sys
+try:
+    import setuptools
+except ImportError:
+    from distribute_setup import use_setuptools
+    use_setuptools()
+from setuptools import setup, Extension
+from setuptools import find_packages
+
+mod_cv_algorithms = Extension('cv_algorithms._cv_algorithms',
+                         sources=['thinning.cpp'],
+                         extra_compile_args=["-g", "-O2", "-march=native"],
+                         extra_link_args=["-g"])
+
+setup(
+    name='cv_algorithms',
+    license='Apache license 2.0',
+    packages=find_packages(exclude=['tests*']),
+    install_requires=['cffi>=0.7'],
+    ext_modules=[mod_cv_algorithms],
+    zip_safe=False,
+    version='1.0.0',
+    long_description=open("README.rst").read(),
+    description='Optimized OpenCV extra algorithms for Python',
+    url="https://github.com/ulikoehler/"
+)
