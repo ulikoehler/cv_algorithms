@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from cffi import FFI
+import numpy as np
 import imp
 import os
 import sys
@@ -45,7 +46,9 @@ def guo_hall_inplace(img):
     if nd != 2:
         raise ValueError("img has wrong number of dimensions ({0} instead of 2)".format(nd))
 
-    # Check order TODO
+    # Check array memory order
+    if np.isfortran(img): # i.e. not C-ordered
+        raise ValueError("Guo-Hall implementation works only on C-ordered arrays")
 
     # Can't perform Guo-hall on 0-2 pixel wide/high images
     height, width = img.shape
@@ -83,7 +86,9 @@ def zhang_suen_inplace(img):
     if nd != 2:
         raise ValueError("img has wrong number of dimensions ({0} instead of 2)".format(nd))
 
-    # Check order TODO
+    # Check order
+    if np.isfortran(img): # i.e. not C-ordered
+        raise ValueError("Guo-Hall implementation works only on C-ordered arrays")
 
     # Can't perform Guo-hall on 0-2 pixel wide/high images
     height, width = img.shape
