@@ -6,9 +6,13 @@ import imp
 import os
 import sys
 import cv2
+# Import submodules to toplevel
+from .text import *
 
-ffi = FFI()
-ffi.cdef('''
+__all__ = ["guo_hall", "zhang_suen"]
+
+__ffi = FFI()
+__ffi.cdef('''
 int guo_hall_thinning(uint8_t* binary_image, size_t width, size_t height);
 int zhang_suen_thinning(uint8_t* binary_image, size_t width, size_t height);
 ''')
@@ -21,16 +25,9 @@ else:
     curmodpath = sys.modules[__name__].__path__
     soname = imp.find_module('_cv_algorithms', curmodpath)[1]
 
-__libcv_algorithms = ffi.dlopen(soname)
+__libcv_algorithms = __ffi.dlopen(soname)
 
-def guo_hall(img):
-    """
-    Guo-Hall variant that works on a copy of the image.
-    See guo_hall_inplace() docs for more info.
-    """
-    return guo_hall_inplace(img.copy())
-
-def guo_hall_inplace(img):
+def guo_hall(img, inplace=False):
     """
     Perform in-place optimized Guo-Hall thinning.
     Returns img.
@@ -39,6 +36,9 @@ def guo_hall_inplace(img):
 
     This calls the optimized C backend from cv_algorithms.
     """
+    # Copy image (it'll be changed by the C code) if not allowed to modify
+    if not inplace:
+        img = img.copy()
     # Check if image seems correct
     nd = len(img.shape)
     if nd == 3:
@@ -55,7 +55,7 @@ def guo_hall_inplace(img):
     if height < 3 or width < 3:
         raise ValueError("Guo-Hall algorithm needs an image at least 3px wide and 3px high")
     # Extract pointer to binary data
-    dptr = ffi.cast("uint8_t*" , img.ctypes.data)
+    dptr = __ffi.cast("uint8_t*" , img.ctypes.data)
 
     rc = __libcv_algorithms.guo_hall_thinning(dptr, width, height)
     if rc != 0:
@@ -63,14 +63,7 @@ def guo_hall_inplace(img):
     return img
 
 
-def zhang_suen(img):
-    """
-    Zhang-Suen variant that works on a copy of the image.
-    See zhang_suen_inplace() docs for more info.
-    """
-    return zhang_suen_inplace(img.copy())
-
-def zhang_suen_inplace(img):
+def zhang_suen(img, inplace=False):
     """
     Perform in-place optimized Zhang-Suen thinning.
     Returns img.
@@ -79,6 +72,9 @@ def zhang_suen_inplace(img):
 
     This calls the optimized C backend from cv_algorithms.
     """
+    # Copy image (it'll be changed by the C code) if not allowed to modify
+    if not inplace:
+        img = img.copy()
     # Check if image seems correct
     nd = len(img.shape)
     if nd == 3:
@@ -95,7 +91,7 @@ def zhang_suen_inplace(img):
     if height < 3 or width < 3:
         raise ValueError("Guo-Hall algorithm needs an image at least 3px wide and 3px high")
     # Extract pointer to binary data
-    dptr = ffi.cast("uint8_t*" , img.ctypes.data)
+    dptr = __ffi.cast("uint8_t*" , img.ctypes.data)
 
     rc = __libcv_algorithms.zhang_suen_thinning(dptr, width, height)
     if rc != 0:

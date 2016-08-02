@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+cv_algorithms thinning example
+"""
 import cv2
 import cv_algorithms
 
@@ -17,7 +20,7 @@ imgThresh = cv2.threshold(imgGray, 180, 255, cv2.THRESH_BINARY)[1]
 guo_hall = cv_algorithms.guo_hall(imgThresh)
 
 # ... or allow the library to modify the original image (= faster):
-# cv_algorithms.guo_hall_inplace(imgThresh, auto_bgr2gray=True)
+# cv_algorithms.guo_hall(imgThresh, inplace=True)
 
 # Alternate algorithm (but very similar)
 # Only slight differences in the output!
