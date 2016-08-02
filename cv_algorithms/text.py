@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Utilities regarding text placement in images.
 Supplements OpenCV's putText()

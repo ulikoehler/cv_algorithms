@@ -8,6 +8,7 @@ import sys
 import cv2
 # Import submodules to toplevel
 from .text import *
+from .contours import *
 
 __all__ = ["guo_hall", "zhang_suen"]
 
