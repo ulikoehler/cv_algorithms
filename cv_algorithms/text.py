@@ -49,7 +49,7 @@ def putTextCenter(img, txt, coords, fontFace, fontScale=1.,
     (w,h), baseline = cv2.getTextSize(txt, fontFace, fontScale, thickness)
     coords = (int(round(coords[0] - w/2) + hshift),
               int(round(coords[1] + h/2) + vshift + baseline_shift * baseline))
-    cv2.putText(ix, txt, coords, fontFace, 1, color, thickness)
+    cv2.putText(img, txt, coords, fontFace, 1, color, thickness)
 
 
 def putTextAutoscale(img, txt, coords, fontFace, w, h, heightFraction=0.5, widthFraction=0.95,
@@ -109,4 +109,4 @@ def putTextAutoscale(img, txt, coords, fontFace, w, h, heightFraction=0.5, width
     # Perform shifting and put text
     coords = (int(round(coords[0] - textw/2) + hshift),
               int(round(coords[1] + texth/2) + vshift + baseline_shift * baseline))
-    cv2.putText(ix, txt, coords, fontFace, newScale, color, thickness)
+    cv2.putText(img, txt, coords, fontFace, newScale, color, thickness)
