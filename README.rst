@@ -5,12 +5,20 @@ cv_algorithms
 A Python package (Python3 ready!) that contains implementations of various OpenCV algorithms are are not
 available in OpenCV or OpenCV-contrib. This package is intended to be used with OpenCV 3.
 
-Most implementations are written in optimized C code. The C code is accessed using `cffi <https://cffi.readthedocs.io/en/latest/>`_.
+Some performance-critical algorithms are written in optimized C code. The C code is accessed using `cffi <https://cffi.readthedocs.io/en/latest/>`_.
 
 Currently implemented: 
  
- - Guo-Hall thinning
- - Zhang-Suen thinning
+ - Algorithms on images
+    - Guo-Hall thinning (C-optimized)
+    - Zhang-Suen thinning (C-optimized)
+ - Algorithms on contours
+    - Maskin extraction of polygon from image without rotation
+    - Scale around reference point or center
+    - Fast computation of center by coordinate averaging
+ - Algorithms on text rendering
+    - Center text at coordinates
+    - Auto-scale text to fix into box
 
 As `cv2` represents images as `numpy <http://www.numpy.org/>`_ arrays, most algorithms generically work with numpy arrays.
 

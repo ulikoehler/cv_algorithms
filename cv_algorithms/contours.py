@@ -6,7 +6,7 @@ Contour utilities
 import cv2
 import numpy as np
 
-__all__ = ["meanCenter", "scaleByRefpoint"]
+__all__ = ["meanCenter", "scaleByRefpoint", "extractPolygonMask"]
 
 
 def meanCenter(contour):
@@ -51,3 +51,50 @@ def scaleByRefpoint(contour, xscale=1., yscale=1., refpoint=None):
     contour[:, 0] += refx
     contour[:, 1] += refy
     return contour
+
+
+def extractPolygonMask(img, rotrect, invmask=False, is_convex=True):
+    """
+    Extract a potentially rotated polygon from an image without rotating anything.
+    (Rotation will cause inaccuracies and interpolation and therefore is often
+    not desirable)
+
+    This works by first extracting the polygon bounding box from the image,
+    then creating an equivalently sized mask. Then, the original (yet now origin-referenced)
+    rotated rectangle is drawn into said mask in black.
+    After than, the mask is ORed onto the img section (for invmask=False)
+    or ANDed onto the img section (for invmask=True), resulting in masked areas
+    to be white (invmask=False) or black (invmask=True).
+
+    This function will work only with grayscale images.
+
+    Parameters
+    ----------
+    img : numpy (x,y) array
+        The image to extract from
+    rotrect : A 4-contour e.g. as returned by cv2.boundingBox(cv2.minAreaRect())
+        The rectangle to extract
+    invmask : bool
+        Set to True for black fill color.
+        Set to false for white fill color.
+    is_convex : bool
+        Set to false if the given polgon may not be convex.
+    """
+    x, y, w, h = cv2.boundingRect(rotrect)
+    # Extract image section
+    imgsec = img[y:y+h, x:x+w]
+    # Create new, equivalently sized image
+    mask = np.full_like(imgsec, 0 if invmask else 255)
+    # Reference rr to origin
+    rect_mask = rotrect - np.asarray([x, y])
+    # Draw rr in the mask in black so we can OR the mask later
+    if is_convex:
+        cv2.fillConvexPoly(mask, rect_mask, 0)
+    else:
+        cv2.fillPoly(mask, [rect_mask], 0)
+    # Apply mask to image section
+    if invmask:
+        imgsec &= mask
+    else:
+        imgsec |= mask
+    return imgsec
