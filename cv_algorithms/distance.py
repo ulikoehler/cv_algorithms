@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-from _ffi
 from ._ffi import *
 
 _ffi.cdef('''
