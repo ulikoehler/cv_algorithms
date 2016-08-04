@@ -13,12 +13,12 @@ class TestXYDistance(object):
         "Simple array-with-itself test"
         # Currently just run and see if it crashes
         a = np.asarray([1., 2., 3.])
-        result = cv_algorithms.xy_distance(a, a)
+        result = cv_algorithms.pairwise_diff(a, a)
         assert_allclose(result, [[0, 1, 2], [1, 0, 1], [2, 1, 0]])
 
     def testDifferentArrays(self):
         # Currently just run and see if it crashes
         a = np.asarray([1., 2., 3.])
         b = np.asarray([2., 3., 4.])
-        result = cv_algorithms.xy_distance(a, b)
+        result = cv_algorithms.pairwise_diff(a, b)
         assert_allclose(result, [[1, 2, 3], [0, 1, 2], [1, 0, 1]])
