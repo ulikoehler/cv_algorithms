@@ -5,13 +5,13 @@
 #include <string.h>
 #include <stdint.h>
 
-/** 
- * Dirty macro to directly access an image at X/Y coordinates.
- * Assumes that the width variable is defined to the width of the image
- */
-#define XY3D(arr, x, y, z) arr[(x)* + (width)*(y)+]
+//Forward declaration required due to CFFI's requirement to have unmangled symbols
+extern "C" {
+	int xy_distance(const double* a, const double* b, double* result, size_t awidth, size_t bwidth);
+	int nd_distance(const double* a, const double* b, double* result, size_t awidth, size_t bwidth, size_t height);
+}
 
- int nd_distance(const double* a, const double* b, double* result, size_t awidth, size_t bwidth) {
+int xy_distance(const double* a, const double* b, double* result, size_t awidth, size_t bwidth) {
 
 	//Iterate over all (a,b) element pairs
 	for (size_t ax = 0; ax < awidth; ++ax) {

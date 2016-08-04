@@ -38,6 +38,3 @@ class TestThinning(object):
         # Currently just run and see if it crashes
         result = cv_algorithms.zhang_suen(self.img_thresh)
         self._checkThinningImage(result)
-
-
-

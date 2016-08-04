@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 from cffi import FFI
-import imp
 import sys
 
 __all__ = ["_ffi", "_libcv_algorithms"]
@@ -12,6 +11,7 @@ if sys.version_info >= (3, 4):
     import importlib
     soname = importlib.util.find_spec("cv_algorithms._cv_algorithms").origin
 else:
+    import imp
     curmodpath = sys.modules[__name__].__path__
     soname = imp.find_module('_cv_algorithms', curmodpath)[1]
 
