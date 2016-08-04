@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from ._ffi import *
+import numpy as np
 
 _ffi.cdef('''
 int xy_distance(const double* a, const double* b, double* result, size_t awidth, size_t bwidth, size_t height);

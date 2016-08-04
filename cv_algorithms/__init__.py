@@ -6,4 +6,5 @@ from .text import *
 from .contours import *
 from .classification import *
 from .thinning import *
+from .distance import *
 
