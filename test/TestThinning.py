@@ -3,8 +3,6 @@
 import io
 from numpy.testing import assert_approx_equal, assert_allclose, assert_array_equal
 from nose.tools import assert_equal, assert_true, assert_false, assert_greater, assert_less
-from UliEngineering.Utils.Files import *
-from UliEngineering.Utils.Temporary import *
 import cv2
 import cv_algorithms
 
