@@ -28,9 +28,17 @@ class TestThinning(object):
         result_numblack = np.sum(result == 0)
         assert_greater(result_numblack, orig_numblack)
 
-
     def testGuoHall(self):
+        "Test Guo-Hall thinning"
         # Currently just run and see if it crashes
-        guo_hall_result = cv_algorithms.guo_hall(self.img_thresh)
-        self._checkThinningImage(guo_hall_result)
+        result = cv_algorithms.guo_hall(self.img_thresh)
+        self._checkThinningImage(result)
+
+    def testZhangSuen(self):
+        "Test Zhang-Suen thinning"
+        # Currently just run and see if it crashes
+        result = cv_algorithms.zhang_suen(self.img_thresh)
+        self._checkThinningImage(result)
+
+
 
