@@ -3,29 +3,17 @@
 """
 Thinning algorithms
 """
-from cffi import FFI
 import numpy as np
-import imp
-import sys
 import cv2
+from ._ffi import *
 
 __all__ = ["guo_hall", "zhang_suen"]
 
-__ffi = FFI()
-__ffi.cdef('''
+_ffi.cdef('''
 int guo_hall_thinning(uint8_t* binary_image, size_t width, size_t height);
 int zhang_suen_thinning(uint8_t* binary_image, size_t width, size_t height);
 ''')
 
-# Open native library
-if sys.version_info >= (3, 4):
-    import importlib
-    soname = importlib.util.find_spec("cv_algorithms._cv_algorithms").origin
-else:
-    curmodpath = sys.modules[__name__].__path__
-    soname = imp.find_module('_cv_algorithms', curmodpath)[1]
-
-__libcv_algorithms = __ffi.dlopen(soname)
 
 def guo_hall(img, inplace=False):
     """
@@ -55,9 +43,9 @@ def guo_hall(img, inplace=False):
     if height < 3 or width < 3:
         raise ValueError("Guo-Hall algorithm needs an image at least 3px wide and 3px high")
     # Extract pointer to binary data
-    dptr = __ffi.cast("uint8_t*" , img.ctypes.data)
+    dptr = _ffi.cast("uint8_t*" , img.ctypes.data)
 
-    rc = __libcv_algorithms.guo_hall_thinning(dptr, width, height)
+    rc = _libcv_algorithms.guo_hall_thinning(dptr, width, height)
     if rc != 0:
         raise ValueError("Internal error (return code {0}) in algorithm C code".format(rc))
     return img
@@ -91,9 +79,9 @@ def zhang_suen(img, inplace=False):
     if height < 3 or width < 3:
         raise ValueError("Guo-Hall algorithm needs an image at least 3px wide and 3px high")
     # Extract pointer to binary data
-    dptr = __ffi.cast("uint8_t*" , img.ctypes.data)
+    dptr = _ffi.cast("uint8_t*" , img.ctypes.data)
 
-    rc = __libcv_algorithms.zhang_suen_thinning(dptr, width, height)
+    rc = _libcv_algorithms.zhang_suen_thinning(dptr, width, height)
     if rc != 0:
         raise ValueError("Internal error (return code {0}) in algorithm C code".format(rc))
     return img
