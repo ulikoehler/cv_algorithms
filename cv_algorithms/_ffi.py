@@ -12,7 +12,7 @@ if sys.version_info >= (3, 4):
     soname = importlib.util.find_spec("cv_algorithms._cv_algorithms").origin
 else:
     import imp
-    curmodpath = sys.modules[__name__].__path__
+    curmodpath = sys.modules["cv_algorithms"].__path__
     soname = imp.find_module('_cv_algorithms', curmodpath)[1]
 
 _libcv_algorithms = _ffi.dlopen(soname)
