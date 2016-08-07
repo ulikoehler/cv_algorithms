@@ -19,6 +19,8 @@ Currently implemented:
  - Algorithms on text rendering
     - Center text at coordinates
     - Auto-scale text to fix into box
+ - Morphological algorithms
+    - Difference-of-Gaussian transform
 
 As `cv2` represents images as `numpy <http://www.numpy.org/>`_ arrays, most algorithms generically work with numpy arrays.
 

@@ -8,7 +8,7 @@ _ffi = FFI()
 
 # Open native library
 if sys.version_info >= (3, 4):
-    import importlib
+    import importlib.util
     soname = importlib.util.find_spec("cv_algorithms._cv_algorithms").origin
 else:
     import imp
