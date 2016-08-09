@@ -13,9 +13,10 @@ Currently implemented:
     - Guo-Hall thinning (C-optimized)
     - Zhang-Suen thinning (C-optimized)
  - Algorithms on contours
-    - Maskin extraction of polygon from image without rotation
+    - Masking extraction of convex polygon area from image without rotation
     - Scale around reference point or center
     - Fast computation of center by coordinate averaging
+    - Center-invariant rescaling of upright bounding rectangle by x/y factors 
  - Algorithms on text rendering
     - Center text at coordinates
     - Auto-scale text to fix into box
