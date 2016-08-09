@@ -6,7 +6,7 @@ Contour utilities
 import cv2
 import numpy as np
 
-__all__ = ["meanCenter", "scaleByRefpoint", "extractPolygonMask"]
+__all__ = ["meanCenter", "scaleByRefpoint", "extractPolygonMask", "expandRectangle"]
 
 
 def meanCenter(contour):
