@@ -116,4 +116,4 @@ def expandRectangle(rect, xfactor=3, yfactor=3):
     y -= ((yfactor - 1) / 2) * h
     h *= yfactor
     return (int(round(x)), int(round(y)),
-            int(round(w)), int(round(w)))
+            int(round(w)), int(round(h)))
