@@ -104,7 +104,9 @@ def expandRectangle(rect, xfactor=3, yfactor=3):
     """
     Takes a (x,y,w,h) rectangle tuple and returns a new bounding
     rectangle that is centered on the center of the origin rectangle,
-    but has a width/height that is larger by a given factor
+    but has a width/height that is larger by a given factor.
+
+    The returned coordinates are rounded to integers
     """
     x, y, w, h = rect
     # Horizontal expansion
@@ -113,5 +115,5 @@ def expandRectangle(rect, xfactor=3, yfactor=3):
     # Horizontal expansion
     y -= ((yfactor - 1) / 2) * h
     h *= yfactor
-    return (x, y, w, h)
-
+    return (int(round(x)), int(round(y)),
+            int(round(w)), int(round(w)))
