@@ -6,7 +6,8 @@ Contour utilities
 import cv2
 import numpy as np
 
-__all__ = ["meanCenter", "scaleByRefpoint", "extractPolygonMask", "expandRectangle"]
+__all__ = ["meanCenter", "scaleByRefpoint", "extractPolygonMask", "expandRectangle",
+           "cropBorderFraction"]
 
 
 def meanCenter(contour):
@@ -117,3 +118,20 @@ def expandRectangle(rect, xfactor=3, yfactor=3):
     h *= yfactor
     return (int(round(x)), int(round(y)),
             int(round(w)), int(round(h)))
+
+
+def cropBorderFraction(img, crop_left=.1, crop_right=.1, crop_top=.1, crop_bot=.1):
+    """
+    Crop a fraction of the image at its borders.
+    For example, cropping 10% (.1) of a 100x100 image left border
+    would result in the leftmost 10px to be cropped.
+
+    The number of pixels to be cropped are computed based on the original
+    image size.
+    """
+    w, h = img.shape[0], img.shape[1]
+    nleft = int(round(crop_left * w))
+    nright = int(round(crop_right * w))
+    ntop = int(round(crop_top * h))
+    nbot = int(round(crop_bot * h))
+    return img[ntop:-nbot, nleft:-nright]

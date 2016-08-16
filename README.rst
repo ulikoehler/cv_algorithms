@@ -9,9 +9,10 @@ Some performance-critical algorithms are written in optimized C code. The C code
 
 Currently implemented: 
  
- - Algorithms on images
+ - Morphological algorithms
     - Guo-Hall thinning (C-optimized)
     - Zhang-Suen thinning (C-optimized)
+    - Difference-of-Gaussian transform
  - Algorithms on contours
     - Masking extraction of convex polygon area from image without rotation
     - Scale around reference point or center
@@ -20,8 +21,8 @@ Currently implemented:
  - Algorithms on text rendering
     - Center text at coordinates
     - Auto-scale text to fix into box
- - Morphological algorithms
-    - Difference-of-Gaussian transform
+ - Other algorithms
+    - Remove n percent of image borders
 
 As `cv2` represents images as `numpy <http://www.numpy.org/>`_ arrays, most algorithms generically work with numpy arrays.
 
