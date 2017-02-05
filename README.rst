@@ -1,6 +1,9 @@
 ========
 cv_algorithms
 ========
+.. image:: https://codeclimate.com/github/ulikoehler/cv_algorithms/badges/gpa.svg
+   :target: https://codeclimate.com/github/ulikoehler/cv_algorithms
+   :alt: Code Climate
 
 A Python package (Python3 ready!) that contains implementations of various OpenCV algorithms are are not
 available in OpenCV or OpenCV-contrib. This package is intended to be used with OpenCV 3.
