@@ -1,15 +1,11 @@
 language: python
     - "2.7"
-addons:
-    apt:
-        packages:
-            - python-opencv
-            - python-cffi
 cache: pip
 install:
-    - pip install numpy codecov rednose nose coverage nose-parameterized --upgrade
+    - pip install numpy codecov rednose nose coverage nose-parameterized opencv-python cffi
     - pip install .
 script: nosetests
 dist: trusty
+sudo: false
 after_success:
     codecov
