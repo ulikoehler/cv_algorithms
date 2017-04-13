@@ -44,6 +44,8 @@ def __run_thinning(img, inplace, cfun):
     __check_image_fortran_order(img)
     __check_image_min_wh(img, 3, 3)
 
+    height, width = img.shape
+
     # Extract pointer to binary data
     dptr = _ffi.cast("uint8_t*", img.ctypes.data)
 
@@ -64,7 +66,6 @@ def guo_hall(img, inplace=False):
     """
     return __run_thinning(img, inplace, _libcv_algorithms.guo_hall_thinning)
     
-
 
 def zhang_suen(img, inplace=False):
     """

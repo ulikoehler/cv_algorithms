@@ -7,7 +7,8 @@ import cv2
 import numpy as np
 
 __all__ = ["meanCenter", "scaleByRefpoint", "extractPolygonMask", "expandRectangle",
-           "cropBorderFraction"]
+           "cropBorderFraction", "filter_min_area", "filter_max_area",
+           "sort_by_area"]
 
 
 def meanCenter(contour):
@@ -135,3 +136,35 @@ def cropBorderFraction(img, crop_left=.1, crop_right=.1, crop_top=.1, crop_bot=.
     ntop = int(round(crop_top * h))
     nbot = int(round(crop_bot * h))
     return img[ntop:-nbot, nleft:-nright]
+
+def filter_min_area(contours, min_area):
+    """
+    Filter a list of contours, requiring
+    a polygon to have an area of >= min_area
+    to pass the filter.
+
+    Uses OpenCV's contourArea for fast area computation
+
+    Returns a list of contours.
+    """
+    return list(filter(lambda cnt: cv2.contourArea(cnt) >= min_area,
+        contours))
+
+def filter_max_area(contours, max_area):
+    """
+    Filter a list of contours, requiring
+    a polygon to have an area of <= max_area
+    to pass the filter.
+
+    Uses OpenCV's contourArea for fast area computation
+
+    Returns a list of contours.
+    """
+    return list(filter(lambda cnt: cv2.contourArea(cnt) <= max_area,
+        contours))
+
+def sort_by_area(contours, reverse=False):
+    """
+    Sort a list of contours by area
+    """
+    return sorted(contours, key=cv2.contourArea, reverse=True)

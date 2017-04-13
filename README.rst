@@ -21,6 +21,8 @@ Currently implemented:
     - Scale around reference point or center
     - Fast computation of center by coordinate averaging
     - Center-invariant rescaling of upright bounding rectangle by x/y factors 
+    - Filter by min/max area
+    - Sort by area
  - Algorithms on text rendering
     - Center text at coordinates
     - Auto-scale text to fix into box
