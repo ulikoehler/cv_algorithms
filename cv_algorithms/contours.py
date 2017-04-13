@@ -8,7 +8,7 @@ import numpy as np
 
 __all__ = ["meanCenter", "scaleByRefpoint", "extractPolygonMask", "expandRectangle",
            "cropBorderFraction", "filter_min_area", "filter_max_area",
-           "sort_by_area"]
+           "sort_by_area", "contour_mask"]
 
 
 def meanCenter(contour):
@@ -168,3 +168,30 @@ def sort_by_area(contours, reverse=False):
     Sort a list of contours by area
     """
     return sorted(contours, key=cv2.contourArea, reverse=True)
+
+def contour_mask(shape, cnt):
+    """
+    Generate a black-white mask of one or multiple contours
+
+    Parameters
+    ==========
+    cnt : Numpy array of points (contour) or list of contours
+        The contour(s) to mark. May overlap.
+    img: Numpy array or (width,height) tuple
+        The image or its shape (only the .shape property will be used)
+        Contour parts are ignored if they are outside the image
+
+    Returns
+    =======
+    A black-white np.uint8 image with the contour marked in 100% white
+    """
+    if isinstance(cnt, np.ndarray):
+        cnt = [cnt]
+    if isinstance(shape, np.ndarray):
+        shape = shape.shape
+    if len(shape) > 2:
+        shape = (shape[0], shape[1])
+    # Create mask image
+    mask = np.zeros(shape, dtype=np.uint8)
+    cv2.drawContours(mask, cnt, -1, (255,255,255), -1)
+    return mask
