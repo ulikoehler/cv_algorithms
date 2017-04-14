@@ -47,9 +47,9 @@ Installation
 Usage
 =====
 
-.. _Difference of Gaussian transform documentation & example: https://github.com/ulikoehler/cv_algorithms/blob/master/doc/DoG.md
-.. _Grassfire transform documentation & example: https://github.com/ulikoehler/cv_algorithms/blob/master/doc/Grassfire.md
-.. _Thinning documentation & example: https://github.com/ulikoehler/cv_algorithms/blob/master/doc/Thinning.md
+`Difference of Gaussian transform documentation & example <https://github.com/ulikoehler/cv_algorithms/blob/master/doc/DoG.md>`_
+`Grassfire transform documentation & example <https://github.com/ulikoehler/cv_algorithms/blob/master/doc/Grassfire.md>`_
+`Thinning documentation & example <https://github.com/ulikoehler/cv_algorithms/blob/master/doc/Thinning.md>`_
 
 Here's a simple usage showcase:
 
