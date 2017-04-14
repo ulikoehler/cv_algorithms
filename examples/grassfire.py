@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-cv_algorithms thinning example
+cv_algorithms grassfire example
 """
 import cv2
 import cv_algorithms
