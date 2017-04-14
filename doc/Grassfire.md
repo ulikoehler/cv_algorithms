@@ -16,7 +16,7 @@ Input:
 
 Output:
 
-[![Grassfire result](https://raw.githubusercontent.com/ulikoehler/cv_algorithms/master/examples/grassfire-result.png)
+![Grassfire result](https://raw.githubusercontent.com/ulikoehler/cv_algorithms/master/examples/grassfire-result.png)
 
 
 ## A pure python implementation
