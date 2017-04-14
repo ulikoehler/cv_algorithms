@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-cv_algorithms thinning example
+cv_algorithms difference-of-gaussian example
 """
 import cv2
 import cv_algorithms
