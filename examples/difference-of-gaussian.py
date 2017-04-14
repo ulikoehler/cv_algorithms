@@ -14,4 +14,4 @@ imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 result = cv_algorithms.difference_of_gaussian(imgGray, 5, 1, invert=True)
 
 # Write to file so you can see what's been done
-cv2.imwrite("difference-of-gaussian.png", result)
+cv2.imwrite("difference-of-gaussian-result.png", result)
