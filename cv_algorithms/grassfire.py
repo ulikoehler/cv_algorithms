@@ -10,7 +10,7 @@ from ._checks import *
 __all__ = ["grassfire"]
 
 _ffi.cdef('''
-int grassfire(uint32_t* dst, const uint8_t* mask, uint32_t width, uint32_t height);
+int grassfire(uint32_t* dst, const uint8_t* mask, int width, int height);
 ''')
 
 def grassfire(img):

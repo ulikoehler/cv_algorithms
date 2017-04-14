@@ -10,7 +10,7 @@ from ._checks import *
 __all__ = ["binary_directions"]
 
 _ffi.cdef('''
-int binary_directions(uint8_t* dst, const uint8_t* src, uint32_t width, uint32_t height);
+int binary_directions(uint8_t* dst, const uint8_t* src, int width, int height);
 ''')
 
 def binary_directions(img):
@@ -33,10 +33,21 @@ def binary_directions(img):
     where the following bits are set or unset,
     if the respective neighbouring pixel is set or unset.
 
+    Bit index by position:
+    
         0 1 2
         3   4
         5 6 7
 
+    Note that for Numpy due to the coordinate system,
+    the respective pixels can be accessed like this:
+
+        [y-1,x-1]  [y-1,x]  [y-1,x+1]
+        [y,x-1]    [y,x]    [y,x+1]
+        [y+1,x-1]  [y+1,x]  [y+1,x+1]
+
+    The positions in this matrix correspond to the bit number
+    shown above, e.g. bit #4 is (1 << 4) ORed to the result.
     """
     # Check if image has the correct type
     __check_image_grayscale_2d(img)

@@ -13,7 +13,7 @@ using std::max;
 
 //Forward declaration required due to CFFI's requirement to have unmangled symbols
 extern "C" {
-    int grassfire(uint32_t* dst, const uint8_t* mask, uint32_t width, uint32_t height);
+    int grassfire(uint32_t* dst, const uint8_t* mask, int width, int height);
 }
 
 /**
@@ -21,10 +21,10 @@ extern "C" {
  * Takes a destination counter array (must be zero-initialized)
  * and a binary mask array (checked for != 0).
  */
-int grassfire(uint32_t* dst, const uint8_t* mask, uint32_t width, uint32_t height) {
+int grassfire(uint32_t* dst, const uint8_t* mask, int width, int height) {
     // 1st pass
-    for (uint32_t x = 0; x < width; ++x) {
-        for (uint32_t y = 0; y < height; ++y) {
+    for (int x = 0; x < width; ++x) {
+        for (int y = 0; y < height; ++y) {
             if (IMG_XY(mask, x, y) != 0) { // Pixel in contour
                 // Get neighbors
                 int north = (y == 0) ? 0 : IMG_XY(dst, x, y - 1);
