@@ -7,6 +7,7 @@ from .contours import *
 from .classification import *
 from .directions import *
 from .morphology import *
+from .popcount import *
 from .thinning import *
 from .grassfire import *
 from .distance import *
