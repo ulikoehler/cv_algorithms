@@ -10,7 +10,9 @@ from setuptools import setup, Extension
 from setuptools import find_packages
 
 mod_cv_algorithms = Extension('cv_algorithms._cv_algorithms',
-                         sources=['src/thinning.cpp', 'src/distance.cpp'],
+                         sources=['src/thinning.cpp',
+                                  'src/distance.cpp',
+                                  'src/grassfire.cpp'],
                          extra_compile_args=["-g", "-O2", "-march=native"],
                          extra_link_args=["-g"])
 

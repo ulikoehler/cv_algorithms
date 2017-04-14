@@ -5,17 +5,14 @@
 #include <string.h>
 #include <stdint.h>
 
+#include "common.hpp"
+
 //Forward declaration required due to CFFI's requirement to have unmangled symbols
 extern "C" {
 	int guo_hall_thinning(uint8_t* binary_image, size_t width, size_t height);
 	int zhang_suen_thinning(uint8_t* binary_image, size_t width, size_t height);
 }
 
-/** 
- * Dirty macro to directly access an image at X/Y coordinates.
- * Assumes that the width variable is defined to the width of the image
- */
-#define IMG_XY(img, x, y) img[(x) + (width)*(y)]
  
 /**
  * Perform a logical AND on a memory array (a), ANDing it with another array (b)
