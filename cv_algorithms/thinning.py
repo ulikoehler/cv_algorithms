@@ -22,7 +22,7 @@ def __run_thinning(img, inplace, cfun):
         img = img.copy()
     # Check if image seems correct
     __check_image_grayscale_2d(img)
-    __check_image_fortran_order(img)
+    img = force_c_order_contiguous(img)
     __check_image_min_wh(img, 3, 3)
     __check_array_uint8(img)
 

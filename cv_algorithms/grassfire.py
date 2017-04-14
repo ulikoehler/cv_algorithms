@@ -10,7 +10,7 @@ from ._checks import *
 __all__ = ["grassfire"]
 
 _ffi.cdef('''
-int grassfire(uint32_t* dst, const uint8_t* mask, size_t width, size_t height);
+int grassfire(uint32_t* dst, const uint8_t* mask, uint32_t width, uint32_t height);
 ''')
 
 def grassfire(img):
@@ -31,14 +31,15 @@ def grassfire(img):
     """
     # Check if image has the correct type
     __check_image_grayscale_2d(img)
-    __check_image_fortran_order(img)
+    img = force_c_order_contiguous(img)
     __check_array_uint8(img)
 
-    width, height = img.shape
+    height, width = img.shape
 
     # Allocate output array
     # uint32 is used so there is no overflow for large inputs
-    out = np.zeros(img.shape, dtype=np.uint32)
+    out = np.zeros(img.shape, dtype=np.uint32, order="C")
+    assert not np.isfortran(out)
 
     # Extract pointer to binary data
     maskptr = _ffi.cast("uint8_t*", img.ctypes.data)

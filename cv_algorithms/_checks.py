@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 import numpy as np
 
-__all__ = ["__check_image_fortran_order", "__check_image_grayscale_2d",
-           "__check_image_min_wh", "__check_array_uint8"]
+__all__ = ["__check_image_c_order", "__check_image_grayscale_2d",
+           "__check_image_min_wh", "__check_array_uint8",
+           "force_c_order_contiguous"]
 
 
 def __check_image_min_wh(img, min_width, min_height):
@@ -12,11 +13,21 @@ def __check_image_min_wh(img, min_width, min_height):
         raise ValueError("Thinning algorithm needs an image at least 3px wide and 3px high but size is {}".format(img.shape))
 
 
-def __check_image_fortran_order(img):
+def __check_image_c_order(img):
     """Raise if the image is not in FORTRAN memory order"""
     # Check array memory order
     if np.isfortran(img): # i.e. not C-ordered
-        raise ValueError("cv_algorithms thinning implementation works only on C-ordered arrays")
+        raise ValueError("cv_algorithms works only on C-ordered arrays")
+    if not img.flags['C_CONTIGUOUS']:
+        raise ValueError("cv_algorithms works only on contiguous arrays")
+
+
+def force_c_order_contiguous(img):
+    """Raise if the image is not in FORTRAN memory order"""
+    # Check array memory order
+    if not img.flags['C_CONTIGUOUS']: # i.e. not C-ordered
+        return np.ascontiguousarray(img)
+    return img
 
 
 def __check_image_grayscale_2d(img):
