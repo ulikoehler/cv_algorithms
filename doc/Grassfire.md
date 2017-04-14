@@ -11,10 +11,12 @@ For a simple example source code see [this file](https://github.com/ulikoehler/c
 This example has been generated using the example script linked to above.
 
 Input:
-[![Grassfire input](https://raw.githubusercontent.com/ulikoehler/cv_algorithms/master/examples/grassfire-example.png)]
+
+![Grassfire input](https://raw.githubusercontent.com/ulikoehler/cv_algorithms/master/examples/grassfire-example.png)
 
 Output:
-[![Grassfire result](https://raw.githubusercontent.com/ulikoehler/cv_algorithms/master/examples/grassfire-result.png)]
+
+[![Grassfire result](https://raw.githubusercontent.com/ulikoehler/cv_algorithms/master/examples/grassfire-result.png)
 
 
 ## A pure python implementation
