@@ -13,7 +13,7 @@ using std::max;
 
 //Forward declaration required due to CFFI's requirement to have unmangled symbols
 extern "C" {
-    int grassfire(const uint32_t* dst, const uint8_t* mask, size_t width, size_t height);
+    int grassfire(uint32_t* dst, const uint8_t* mask, size_t width, size_t height);
 }
 
 /**

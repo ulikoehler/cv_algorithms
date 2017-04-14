@@ -7,5 +7,5 @@ from .contours import *
 from .classification import *
 from .morphology import *
 from .thinning import *
+from .grassfire import *
 from .distance import *
-
