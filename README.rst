@@ -47,7 +47,11 @@ Installation
 Usage
 =====
 
-`Full thinning example <https://github.com/ulikoehler/cv_algorithms/blob/master/examples/thinning.py>`_
+.. _Difference of Gaussian transform documentation & example: https://github.com/ulikoehler/cv_algorithms/blob/master/doc/DoG.md
+.. _Grassfire transform documentation & example: https://github.com/ulikoehler/cv_algorithms/blob/master/doc/Grassfire.md
+.. _Thinning documentation & example: https://github.com/ulikoehler/cv_algorithms/blob/master/doc/Thinning.md
+
+Here's a simple usage showcase:
 
 .. code-block:: python
 
