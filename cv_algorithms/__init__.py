@@ -9,3 +9,4 @@ from .morphology import *
 from .thinning import *
 from .grassfire import *
 from .distance import *
+from .utils import *
