@@ -24,6 +24,7 @@ Currently implemented:
     - Filter by min/max area
     - Sort by area
     - Create binary contour mask
+    - Grassfire transform
  - Algorithms on text rendering
     - Center text at coordinates
     - Auto-scale text to fix into box
