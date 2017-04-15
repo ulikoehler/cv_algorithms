@@ -25,6 +25,8 @@ Currently implemented:
     - Sort by area
     - Create binary contour mask
     - Grassfire transform
+ - Colorspace distance metrics:
+    - Euclidean RGB distance
  - Other structural algorithms
     - Which neighboring pixels are set in a binary image?
  - Algorithms on text rendering

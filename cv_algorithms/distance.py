@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Various distance metrics beteen images and related
+data structures
+"""
+# -*- coding: utf-8 -*-
 from ._ffi import *
 import numpy as np
 
-__all__ = ["pairwise_diff"]
+__all__ = ["pairwise_diff", "rgb_distance"]
 
 _ffi.cdef('''
 int pairwise_diff(const double* a, const double* b, double* result, size_t awidth, size_t bwidth);
@@ -29,3 +35,26 @@ def pairwise_diff(a, b):
     _libcv_algorithms.pairwise_diff(aptr, bptr, outptr, a.shape[0], b.shape[0])
 
     return out
+
+def rgb_distance(img, color):
+    """
+    Compute the euclidean distance between
+    the given color and each pixel in the image
+    in the RGB space.
+
+    Computes
+    sqrt(rdelta² + gdelta² + bdelta²)
+
+    Parameters
+    ==========
+    img : 2D RGB image as numpy array
+        The RGB or BGR OpenCV image
+    color : RGB 3-tuple
+
+    Returns
+    =======
+    A numpy float array the same size as img,
+    representing the pixel-to-color distances
+    """
+    imgfloat = img.astype(np.float)
+    return np.sqrt(np.sum(np.square(imgfloat[:,:] - color), axis=2))
