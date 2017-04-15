@@ -127,5 +127,7 @@ class TestNeighbours(object):
         img[0,0] = 255
         cv_algorithms.binary_neighbours(img)
 
-    def test_direction_repr(self):
+    def test_direction_str(self):
         assert_equal("↑", str(Direction.North))
+        assert_equal(Direction.North, Direction.from_unicode("↑"))
+        assert_equal([Direction.SouthEast, Direction.North], Direction.from_unicode("↘↑"))

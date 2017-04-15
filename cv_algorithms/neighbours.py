@@ -99,6 +99,27 @@ class Direction(enum.IntEnum):
             Direction.SouthWest: "↙"
         }[self]
 
+    @staticmethod
+    def from_unicode(s):
+        """
+        Convert a arrow string (such as returned by __str__())
+        to one or multiple Direction instances
+        """
+        if len(s) == 1:
+            return {
+                "←": Direction.West,
+                "↑": Direction.North,
+                "→": Direction.East,
+                "↓": Direction.South,
+                "↖": Direction.NorthWest,
+                "↗": Direction.NorthEast,
+                "↘": Direction.SouthEast,
+                "↙": Direction.SouthWest
+            }[s]
+        else:
+            return [Direction.from_unicode(c) for c in s]
+
+
 class Neighbours():
     """
     *is_xxx():*
