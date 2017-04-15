@@ -23,6 +23,7 @@ class TestNeighbours(object):
         # Center
         assert_equal(0, directions[5, 4])
         # NW of the white pixel
+        assert_equal((y-1, x-1), cv_algorithms.NeighbourCheck.northwest_coords(y, x))
         assert_equal((1 << 7), directions[y-1, x-1])
         assert_false(cv_algorithms.NeighbourCheck.is_northwest(directions[y-1, x-1]))
         assert_false(cv_algorithms.NeighbourCheck.is_north(directions[y-1, x-1]))
@@ -33,6 +34,7 @@ class TestNeighbours(object):
         assert_false(cv_algorithms.NeighbourCheck.is_south(directions[y-1, x-1]))
         assert_true(cv_algorithms.NeighbourCheck.is_southeast(directions[y-1, x-1]))
         # N of the white pixel
+        assert_equal((y-1, x), cv_algorithms.NeighbourCheck.north_coords(y, x))
         assert_equal((1 << 6), directions[y-1, x])
         assert_false(cv_algorithms.NeighbourCheck.is_northwest(directions[y-1, x]))
         assert_false(cv_algorithms.NeighbourCheck.is_north(directions[y-1, x]))
@@ -43,6 +45,7 @@ class TestNeighbours(object):
         assert_true(cv_algorithms.NeighbourCheck.is_south(directions[y-1, x]))
         assert_false(cv_algorithms.NeighbourCheck.is_southeast(directions[y-1, x]))
         # NE of the white pixel
+        assert_equal((y-1, x+1), cv_algorithms.NeighbourCheck.northeast_coords(y, x))
         assert_equal((1 << 5), directions[y-1, x+1])
         assert_false(cv_algorithms.NeighbourCheck.is_northwest(directions[y-1, x+1]))
         assert_false(cv_algorithms.NeighbourCheck.is_north(directions[y-1, x+1]))
@@ -53,6 +56,7 @@ class TestNeighbours(object):
         assert_false(cv_algorithms.NeighbourCheck.is_south(directions[y-1, x+1]))
         assert_false(cv_algorithms.NeighbourCheck.is_southeast(directions[y-1, x+1]))
         # W of the white pixel
+        assert_equal((y, x-1), cv_algorithms.NeighbourCheck.west_coords(y, x))
         assert_equal((1 << 4), directions[y, x-1])
         assert_false(cv_algorithms.NeighbourCheck.is_northwest(directions[y, x-1]))
         assert_false(cv_algorithms.NeighbourCheck.is_north(directions[y, x-1]))
@@ -63,6 +67,7 @@ class TestNeighbours(object):
         assert_false(cv_algorithms.NeighbourCheck.is_south(directions[y, x-1]))
         assert_false(cv_algorithms.NeighbourCheck.is_southeast(directions[y, x-1]))
         # E of the white pixel
+        assert_equal((y, x+1), cv_algorithms.NeighbourCheck.east_coords(y, x))
         assert_equal((1 << 3), directions[y, x+1])
         assert_false(cv_algorithms.NeighbourCheck.is_northwest(directions[y, x+1]))
         assert_false(cv_algorithms.NeighbourCheck.is_north(directions[y, x+1]))
@@ -73,6 +78,7 @@ class TestNeighbours(object):
         assert_false(cv_algorithms.NeighbourCheck.is_south(directions[y, x+1]))
         assert_false(cv_algorithms.NeighbourCheck.is_southeast(directions[y, x+1]))
         # SW of the white pixel
+        assert_equal((y+1, x-1), cv_algorithms.NeighbourCheck.southwest_coords(y, x))
         assert_equal((1 << 2), directions[y+1, x-1])
         assert_false(cv_algorithms.NeighbourCheck.is_northwest(directions[y+1, x-1]))
         assert_false(cv_algorithms.NeighbourCheck.is_north(directions[y+1, x-1]))
@@ -83,6 +89,7 @@ class TestNeighbours(object):
         assert_false(cv_algorithms.NeighbourCheck.is_south(directions[y+1, x-1]))
         assert_false(cv_algorithms.NeighbourCheck.is_southeast(directions[y+1, x-1]))
         # S of the white pixel
+        assert_equal((y+1, x), cv_algorithms.NeighbourCheck.south_coords(y, x))
         assert_equal((1 << 1), directions[y+1, x])
         assert_false(cv_algorithms.NeighbourCheck.is_northwest(directions[y+1, x]))
         assert_true(cv_algorithms.NeighbourCheck.is_north(directions[y+1, x]))
@@ -93,6 +100,7 @@ class TestNeighbours(object):
         assert_false(cv_algorithms.NeighbourCheck.is_south(directions[y+1, x]))
         assert_false(cv_algorithms.NeighbourCheck.is_southeast(directions[y+1, x]))
         # SE of the white pixel
+        assert_equal((y+1, x+1), cv_algorithms.NeighbourCheck.southeast_coords(y, x))
         assert_equal((1 << 0), directions[y+1, x+1])
         assert_true(cv_algorithms.NeighbourCheck.is_northwest(directions[y+1, x+1]))
         assert_false(cv_algorithms.NeighbourCheck.is_north(directions[y+1, x+1]))

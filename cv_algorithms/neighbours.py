@@ -46,6 +46,9 @@ def binary_neighbours(img):
         [y,x-1]    [y,x]    [y,x+1]
         [y+1,x-1]  [y+1,x]  [y+1,x+1]
 
+    This is equivalent to the coordinate system when displaying
+    the image using matplotlib imshow
+
     The positions in this matrix correspond to the bit number
     shown above, e.g. bit #4 is (1 << 4) ORed to the result.
     """
@@ -72,16 +75,45 @@ def binary_neighbours(img):
 
 class NeighbourCheck():
     """
+    *is_xxx():*
     Methods for checking one pixel of the result of binary_neighbours()
-    if it has a marked neighbour for a given result
+    if it has a marked neighbour for a given result.
+
+    *xxx_coords():*
+    Get the numpy coordinate for the pixel in the given
+    direction of the given coordinate
     """
     @staticmethod
     def is_northwest(pixel): return bool(pixel & (1 << 0))
+    @staticmethod
     def is_north(pixel): return bool(pixel & (1 << 1))
+    @staticmethod
     def is_northeast(pixel): return bool(pixel & (1 << 2))
+    @staticmethod
     def is_west(pixel): return bool(pixel & (1 << 3))
+    @staticmethod
     def is_east(pixel): return bool(pixel & (1 << 4))
+    @staticmethod
     def is_southwest(pixel): return bool(pixel & (1 << 5))
+    @staticmethod
     def is_south(pixel): return bool(pixel & (1 << 6))
+    @staticmethod
     def is_southeast(pixel): return bool(pixel & (1 << 7))
+
+    @staticmethod
+    def northwest_coords(y, x): return (y-1, x-1)
+    @staticmethod
+    def north_coords(y, x): return (y-1, x)
+    @staticmethod
+    def northeast_coords(y, x): return (y-1, x+1)
+    @staticmethod
+    def west_coords(y, x): return (y, x-1)
+    @staticmethod
+    def east_coords(y, x): return (y, x+1)
+    @staticmethod
+    def southwest_coords(y, x): return (y+1, x-1)
+    @staticmethod
+    def south_coords(y, x): return (y+1, x)
+    @staticmethod
+    def southeast_coords(y, x): return (y+1, x+1)
     
