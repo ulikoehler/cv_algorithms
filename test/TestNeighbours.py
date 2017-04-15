@@ -7,14 +7,14 @@ import cv2
 import cv_algorithms
 import numpy as np
 
-class TestDirections(object):
-    def test_binary_directions_simple(self):
+class TestNeighbours(object):
+    def test_binary_neighbours_simple(self):
         """Test binary direction detection"""
         img = np.zeros((10,8), dtype=np.uint8)
         y, x = 5, 4
         img[5,4] = 255
         # Currently just test whether it crashes
-        directions = cv_algorithms.binary_directions(img)
+        directions = cv_algorithms.binary_neighbours(img)
         print(directions)
         assert_equal(0, directions[0,0])
         # Center
@@ -36,9 +36,9 @@ class TestDirections(object):
         # SE
         assert_equal((1 << 7), directions[y+1, x+1])
 
-    def test_binary_directions_corner(self):
+    def test_binary_neighbours_corner(self):
         # Just test if it crashes for something in the corners
         img = np.zeros((10,8), dtype=np.uint8)
         img[9,7] = 255
         img[0,0] = 255
-        cv_algorithms.binary_directions(img)
+        cv_algorithms.binary_neighbours(img)

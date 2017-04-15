@@ -7,13 +7,13 @@ import numpy as np
 from ._ffi import *
 from ._checks import *
 
-__all__ = ["binary_directions"]
+__all__ = ["binary_neighbours"]
 
 _ffi.cdef('''
-int binary_directions(uint8_t* dst, const uint8_t* src, int width, int height);
+int binary_neighbours(uint8_t* dst, const uint8_t* src, int width, int height);
 ''')
 
-def binary_directions(img):
+def binary_neighbours(img):
     """
     Takes a binary image and, for each pixel, computes
     which surrounding pixels are non-zero.
@@ -34,7 +34,7 @@ def binary_directions(img):
     if the respective neighbouring pixel is set or unset.
 
     Bit index by position:
-    
+
         0 1 2
         3   4
         5 6 7
@@ -65,7 +65,7 @@ def binary_directions(img):
     srcptr = _ffi.cast("uint8_t*", img.ctypes.data)
     dstptr = _ffi.cast("uint8_t*", out.ctypes.data)
 
-    rc = _libcv_algorithms.binary_directions(dstptr, srcptr, width, height)
+    rc = _libcv_algorithms.binary_neighbours(dstptr, srcptr, width, height)
     if rc != 0:
         raise ValueError("Internal error (return code {0}) in algorithm C code".format(rc))
     return out

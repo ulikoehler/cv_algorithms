@@ -9,7 +9,7 @@
 
 //Forward declaration required due to CFFI's requirement to have unmangled symbols
 extern "C" {
-    int binary_directions(uint8_t* dst, const uint8_t* src, int width, int height);
+    int binary_neighbours(uint8_t* dst, const uint8_t* src, int width, int height);
 }
 
 /**
@@ -17,7 +17,7 @@ extern "C" {
  * Sets bits in the output array based on if the surrounding pixels
  * are zero or non-zero. See the python docs for more info.
  */
-int binary_directions(uint8_t* dst, const uint8_t* src, int width, int height) {
+int binary_neighbours(uint8_t* dst, const uint8_t* src, int width, int height) {
     // 1st pass
     for (int x = 0; x < width; ++x) {
         for (int y = 0; y < height; ++y) {

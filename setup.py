@@ -14,7 +14,7 @@ mod_cv_algorithms = Extension('cv_algorithms._cv_algorithms',
                                   'src/distance.cpp',
                                   'src/grassfire.cpp',
                                   'src/popcount.cpp',
-                                  'src/directions.cpp'],
+                                  'src/neighbours.cpp'],
                          extra_compile_args=["-g", "-O2", "-march=native"],
                          extra_link_args=["-g"])
 
