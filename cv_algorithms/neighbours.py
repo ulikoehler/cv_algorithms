@@ -7,7 +7,7 @@ import numpy as np
 from ._ffi import *
 from ._checks import *
 
-__all__ = ["binary_neighbours"]
+__all__ = ["binary_neighbours", "NeighbourCheck"]
 
 _ffi.cdef('''
 int binary_neighbours(uint8_t* dst, const uint8_t* src, int width, int height);
@@ -70,4 +70,18 @@ def binary_neighbours(img):
         raise ValueError("Internal error (return code {0}) in algorithm C code".format(rc))
     return out
 
+class NeighbourCheck():
+    """
+    Methods for checking one pixel of the result of binary_neighbours()
+    if it has a marked neighbour for a given result
+    """
+    @staticmethod
+    def is_northwest(pixel): return bool(pixel & (1 << 0))
+    def is_north(pixel): return bool(pixel & (1 << 1))
+    def is_northeast(pixel): return bool(pixel & (1 << 2))
+    def is_west(pixel): return bool(pixel & (1 << 3))
+    def is_east(pixel): return bool(pixel & (1 << 4))
+    def is_southwest(pixel): return bool(pixel & (1 << 5))
+    def is_south(pixel): return bool(pixel & (1 << 6))
+    def is_southeast(pixel): return bool(pixel & (1 << 7))
     
