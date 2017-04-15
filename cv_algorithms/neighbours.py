@@ -156,4 +156,32 @@ class Neighbours():
             Direction.West: Neighbours.west_coords,
             Direction.SouthWest: Neighbours.southwest_coords
         }[direction](y, x)
+
+    @staticmethod
+    def iterate_directions(dirs):
+        """
+        Iterate elements of the Direction IntEnum
+        if the corresponding bit is set 
+
+        See binary_directions for a definition of the
+        bits.
+
+        The order to the directions is the same as the bit order
+        """
+        if Neighbours.is_northwest(dirs):
+            yield Direction.NorthWest
+        if Neighbours.is_north(dirs):
+            yield Direction.North
+        if Neighbours.is_northeast(dirs):
+            yield Direction.NorthEast
+        if Neighbours.is_west(dirs):
+            yield Direction.West
+        if Neighbours.is_east(dirs):
+            yield Direction.East
+        if Neighbours.is_southwest(dirs):
+            yield Direction.SouthWest
+        if Neighbours.is_south(dirs):
+            yield Direction.South
+        if Neighbours.is_southeast(dirs):
+            yield Direction.SouthEast
     
