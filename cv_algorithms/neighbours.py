@@ -125,7 +125,7 @@ class Neighbours():
             Direction.South: Neighbours.is_south,
             Direction.West: Neighbours.is_west,
             Direction.SouthWest: Neighbours.is_southwest
-        }[direction](y, x)
+        }[direction](pixel)
 
     @staticmethod
     def northwest_coords(y, x): return (y-1, x-1)
