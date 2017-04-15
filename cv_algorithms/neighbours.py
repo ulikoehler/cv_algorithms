@@ -100,6 +100,22 @@ class Direction(enum.IntEnum):
         }[self]
 
     @staticmethod
+    def opposite(self):
+        """
+        Return the opposite direction
+        """
+        return {
+            Direction.West: Direction.East,
+            Direction.North: Direction.South,
+            Direction.East: Direction.West,
+            Direction.South: Direction.North,
+            Direction.NorthWest: Direction.SouthEast,
+            Direction.NorthEast: Direction.SouthWest,
+            Direction.SouthEast: Direction.NorthWest,
+            Direction.SouthWest: Direction.NorthEast
+        }[self]
+
+    @staticmethod
     def from_unicode(s):
         """
         Convert a arrow string (such as returned by __str__())
