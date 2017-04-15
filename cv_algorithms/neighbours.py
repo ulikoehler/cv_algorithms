@@ -87,6 +87,18 @@ class Direction(enum.IntEnum):
     South = 7
     SouthEast = 8
 
+    def __str__(self):
+        return {
+            Direction.West: "←",
+            Direction.North: "↑",
+            Direction.East: "→",
+            Direction.South: "↓",
+            Direction.NorthWest: "↖",
+            Direction.NorthEast: "↗",
+            Direction.SouthEast: "↘",
+            Direction.SouthWest: "↙"
+        }[self]
+
 class Neighbours():
     """
     *is_xxx():*
