@@ -78,14 +78,14 @@ class Direction(enum.IntEnum):
     """
     Direction enum, mostly used as an argument for various functions
     """
-    NorthEast = 1
+    NorthWest = 1
     North = 2
-    East = 3
-    NorthWest = 4
-    SouthEast = 5
-    South = 6
-    West = 7
-    SouthWest = 8
+    NorthEast = 3
+    West = 4
+    East = 5
+    SouthWest = 6
+    South = 7
+    SouthEast = 8
 
 class Neighbours():
     """
@@ -115,7 +115,7 @@ class Neighbours():
     def is_southeast(pixel): return bool(pixel & (1 << 7))
 
     @staticmethod
-    def is_direction(direction, y, x):
+    def is_direction(direction, pixel):
         return {
             Direction.NorthEast: Neighbours.is_northeast,
             Direction.North: Neighbours.is_north,
@@ -168,20 +168,6 @@ class Neighbours():
 
         The order to the directions is the same as the bit order
         """
-        if Neighbours.is_northwest(dirs):
-            yield Direction.NorthWest
-        if Neighbours.is_north(dirs):
-            yield Direction.North
-        if Neighbours.is_northeast(dirs):
-            yield Direction.NorthEast
-        if Neighbours.is_west(dirs):
-            yield Direction.West
-        if Neighbours.is_east(dirs):
-            yield Direction.East
-        if Neighbours.is_southwest(dirs):
-            yield Direction.SouthWest
-        if Neighbours.is_south(dirs):
-            yield Direction.South
-        if Neighbours.is_southeast(dirs):
-            yield Direction.SouthEast
+        return (direction for direction in Direction
+            if Neighbours.is_direction(direction, dirs))
     
