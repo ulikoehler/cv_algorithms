@@ -25,11 +25,14 @@ Currently implemented:
     - Sort by area
     - Create binary contour mask
     - Grassfire transform
+ - Other structural algorithms
+    - Which neighboring pixels are set in a binary image?
  - Algorithms on text rendering
     - Center text at coordinates
     - Auto-scale text to fix into box
  - Other algorithms
     - Remove n percent of image borders
+    - Popcount (number of one bits) for 8, 16, 32 and 64 bit numpy arrays
 
 As `cv2` represents images as `numpy <http://www.numpy.org/>`_ arrays, most algorithms generically work with numpy arrays.
 

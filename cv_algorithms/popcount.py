@@ -19,6 +19,7 @@ int popcount64(uint8_t* dst, const uint64_t* src, int size);
 def popcount(arr):
     """
     Provides a population count implementation.
+    The population count is the number of one bits.
     Based on GCC's __builtin_popcount().
 
     The implementation is written in C.
