@@ -6,8 +6,9 @@ Thinning algorithms
 import numpy as np
 from ._ffi import *
 from ._checks import *
+import enum
 
-__all__ = ["binary_neighbours", "NeighbourCheck"]
+__all__ = ["binary_neighbours", "Neighbours", "Direction"]
 
 _ffi.cdef('''
 int binary_neighbours(uint8_t* dst, const uint8_t* src, int width, int height);
@@ -73,7 +74,20 @@ def binary_neighbours(img):
         raise ValueError("Internal error (return code {0}) in algorithm C code".format(rc))
     return out
 
-class NeighbourCheck():
+class Direction(enum.IntEnum):
+    """
+    Direction enum, mostly used as an argument for various functions
+    """
+    NorthEast = 1
+    North = 2
+    East = 3
+    NorthWest = 4
+    SouthEast = 5
+    South = 6
+    West = 7
+    SouthWest = 8
+
+class Neighbours():
     """
     *is_xxx():*
     Methods for checking one pixel of the result of binary_neighbours()
@@ -101,6 +115,19 @@ class NeighbourCheck():
     def is_southeast(pixel): return bool(pixel & (1 << 7))
 
     @staticmethod
+    def is_direction(direction, y, x):
+        return {
+            Direction.NorthEast: Neighbours.is_northeast,
+            Direction.North: Neighbours.is_north,
+            Direction.East: Neighbours.is_east,
+            Direction.NorthWest: Neighbours.is_northwest,
+            Direction.SouthEast: Neighbours.is_southeast,
+            Direction.South: Neighbours.is_south,
+            Direction.West: Neighbours.is_west,
+            Direction.SouthWest: Neighbours.is_southwest
+        }[direction](y, x)
+
+    @staticmethod
     def northwest_coords(y, x): return (y-1, x-1)
     @staticmethod
     def north_coords(y, x): return (y-1, x)
@@ -116,4 +143,17 @@ class NeighbourCheck():
     def south_coords(y, x): return (y+1, x)
     @staticmethod
     def southeast_coords(y, x): return (y+1, x+1)
+
+    @staticmethod
+    def coords(direction, y, x):
+        return {
+            Direction.NorthEast: Neighbours.northeast_coords,
+            Direction.North: Neighbours.north_coords,
+            Direction.East: Neighbours.east_coords,
+            Direction.NorthWest: Neighbours.northwest_coords,
+            Direction.SouthEast: Neighbours.southeast_coords,
+            Direction.South: Neighbours.south_coords,
+            Direction.West: Neighbours.west_coords,
+            Direction.SouthWest: Neighbours.southwest_coords
+        }[direction](y, x)
     
