@@ -8,7 +8,7 @@ data structures
 from ._ffi import *
 import numpy as np
 
-__all__ = ["pairwise_diff", "rgb_distance"]
+__all__ = ["pairwise_diff", "rgb_distance", "grayscale_distance"]
 
 _ffi.cdef('''
 int pairwise_diff(const double* a, const double* b, double* result, size_t awidth, size_t bwidth);
@@ -58,3 +58,24 @@ def rgb_distance(img, color):
     """
     imgfloat = img.astype(np.float)
     return np.sqrt(np.sum(np.square(imgfloat[:,:] - color), axis=2))
+
+def grayscale_distance(img, value):
+    """
+    Compare a value.
+    This is similar to
+
+    np.abs(img - value)
+    but it handles negative values in uint8 images correctly.
+
+    Parameters
+    ==========
+    img
+        A 2D numpy array
+    value:
+        Any grayscale value (single number) to compare to.
+
+    Returns
+    =======
+    A floating point absolute difference image
+    """
+    return np.abs(img.astype(float) - float(value))
