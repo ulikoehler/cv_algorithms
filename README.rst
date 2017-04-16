@@ -25,7 +25,9 @@ Currently implemented:
     - Sort by area
     - Create binary contour mask
     - Grassfire transform
- - Colorspace distance metrics:
+ - Colorspace metrics & utilities:
+    - Convert image to any colorspace supported by OpenCV
+    - Extract any channel from any colorspace directly
     - Euclidean RGB distance
  - Other structural algorithms
     - Which neighboring pixels are set in a binary image?

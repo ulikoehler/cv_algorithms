@@ -27,3 +27,16 @@ class TestColorspace(object):
         assert_equal(Colorspace.LAB, ColorspaceChannel.LAB_b.colorspace)
         assert_equal(Colorspace.XYZ, ColorspaceChannel.XYZ_X.colorspace)
         assert_equal(Colorspace.XYZ, ColorspaceChannel.XYZ_Z.colorspace)
+
+class TestColorspaceConversion(object):
+    def test_convert_to_colorspace(self):
+        img = np.zeros((10,10,3), np.uint8)
+        # Just test if it raises
+        cv_algorithms.convert_to_colorspace(img, Colorspace.BGR)
+        cv_algorithms.convert_to_colorspace(img, Colorspace.LAB)
+        cv_algorithms.convert_to_colorspace(img, Colorspace.LAB, Colorspace.XYZ)
+    
+    def test_extract_channel(self):
+        img = np.zeros((10,10,3), np.uint8)
+        # Just test if it raises
+        cv_algorithms.extract_channel(img, ColorspaceChannel.LAB_L)
