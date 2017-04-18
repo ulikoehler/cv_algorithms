@@ -6,9 +6,10 @@ Utilities for extracting color channels out of arbitrary images
 import cv2
 import numpy as np
 import enum
+from .text import putTextAutoscale
 
 __all__ = ["ColorspaceChannel", "Colorspace", "convert_to_colorspace",
-    "extract_channel"]
+    "extract_channel", "colorspace_components_overview"]
 
 
 class Colorspace(enum.IntEnum):
@@ -88,6 +89,16 @@ class ColorspaceChannel(enum.IntEnum):
         """
         return self.value % 3
 
+    @property
+    def channel_name(self):
+        """
+        The name of the channel,
+        not including the colorspace name.
+
+        Example: RGB_Red => Red
+        """
+        return self.name.partition("_")[2]
+
 
 # Arguments to convert BGR to another colorspace
 _colorspace_cvt_from_bgr = {
@@ -144,7 +155,7 @@ def convert_to_colorspace(img, new_colorspace, source=Colorspace.BGR):
         return img
     return cv2.cvtColor(img, cvt)
 
-def extract_channel(img, channel, source=Colorspace.BGR):
+def extract_channel(img, channel, source=Colorspace.BGR, as_rgb=False):
     """
     Extract a single channel from an arbitrary colorspace
     from an image
@@ -156,7 +167,8 @@ def extract_channel(img, channel, source=Colorspace.BGR):
         The target channel
     source : Colorspace enum
         The current colorspace of the imge
-
+    as_rgb : bool
+        Set to True to obtain the graysca
     Returns
     =======
     The resulting channel as a NumPy image.
@@ -166,5 +178,51 @@ def extract_channel(img, channel, source=Colorspace.BGR):
     # Convert to the correct colorspace
     img = convert_to_colorspace(img, target_space, source)
     # Extract appropriate channel
-    return img[:,:,channel.channel_idx]
+    gray = img[:,:,channel.channel_idx]
+    return cv2.cvtColor(gray, cv2.COLOR_GRAY2RGB) if as_rgb else gray
 
+
+def colorspace_components_overview(img):
+    """
+    Render an image that shows all channels of the given image
+    in all colorspaces in an ordered and labeled manner.
+    """
+    height, width, _ = img.shape
+    ncolspaces = len(Colorspace)
+    hspace = int(0.1 * width)
+    vspace = int(0.1 * height)
+    textheight = int(0.3 * height)
+
+    h = ncolspaces * height + vspace * (ncolspaces - 1) + textheight * ncolspaces
+    w = width * 3 + hspace * 2
+    out = np.full((h, w), 255, dtype=np.uint8)
+
+    for i, colorspace in enumerate(Colorspace):
+        # Compute offsets
+        vofs = textheight * (i + 1) + (vspace + height) * i
+        hofs = lambda col: hspace * col + width * col
+        textvofs = vofs - textheight / 2
+        texthofs = lambda col: hofs(col) + width / 2
+        # Get channels of current colorspace
+        channels = colorspace.channels
+        # Channel text
+        chn0txt = "{} {}".format(colorspace.name, colorspace.channels[0].channel_name)
+        chn1txt = "{} {}".format(colorspace.name, colorspace.channels[1].channel_name)
+        chn2txt = "{} {}".format(colorspace.name, colorspace.channels[2].channel_name)
+        # Extract all channels and convert to gray RGB mge
+        chn0 = extract_channel(img, channels[0])
+        chn1 = extract_channel(img, channels[1])
+        chn2 = extract_channel(img, channels[2])
+        # Copy image channels to output
+        out[vofs:vofs + height, hofs(0):hofs(0) + width] = chn0
+        out[vofs:vofs + height, hofs(1):hofs(1) + width] = chn1
+        out[vofs:vofs + height, hofs(2):hofs(2) + width] = chn2
+        # Render text
+        putTextAutoscale(out, chn0txt, (texthofs(0), textvofs),
+            cv2.FONT_HERSHEY_COMPLEX, width, textheight, color=0)
+        putTextAutoscale(out, chn1txt, (texthofs(1), textvofs),
+            cv2.FONT_HERSHEY_COMPLEX, width, textheight, color=0)
+        putTextAutoscale(out, chn2txt, (texthofs(2), textvofs),
+            cv2.FONT_HERSHEY_COMPLEX, width, textheight, color=0)
+
+    return out

@@ -28,6 +28,10 @@ class TestColorspace(object):
         assert_equal(Colorspace.XYZ, ColorspaceChannel.XYZ_X.colorspace)
         assert_equal(Colorspace.XYZ, ColorspaceChannel.XYZ_Z.colorspace)
 
+    def test_channel_name(self):
+        assert_equal("Red", ColorspaceChannel.RGB_Red.channel_name)
+        assert_equal("b", ColorspaceChannel.LAB_b.channel_name)
+
 class TestColorspaceConversion(object):
     def test_convert_to_colorspace(self):
         img = np.zeros((10,10,3), np.uint8)
