@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import os
 import sys
+import io
 try:
     import setuptools
 except ImportError:
@@ -30,7 +31,7 @@ setup(
     platforms="any",
     zip_safe=False,
     version='1.0.0',
-    long_description=open("README.rst").read(),
+    long_description=io.open("README.rst", encoding="utf-8").read(),
     description='Optimized OpenCV extra algorithms for Python',
     url="https://github.com/ulikoehler/"
 )
