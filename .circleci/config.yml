@@ -8,7 +8,7 @@ jobs:
     docker:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
-      - image: circleci/python:3.6.1
+      - image: ubuntu:18.04
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -30,9 +30,10 @@ jobs:
       - run:
           name: install dependencies
           command: |
+            apt update
+            apt -y install python3-opencv
             python3 -m venv venv
             . venv/bin/activate
-            pip install -r requirements.txt
 
       - save_cache:
           paths:
