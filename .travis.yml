@@ -2,8 +2,8 @@ language: python
     - "2.7"
 cache: pip
 install:
-    - pip install numpy codecov rednose nose coverage nose-parameterized opencv-python cffi
-    - pip install .
+    - sudo pip install numpy codecov rednose nose coverage nose-parameterized opencv-python cffi
+    - sudo pip install .
     - sudo python setup.py install 
 script: nosetests
 dist: xenail
