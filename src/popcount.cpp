@@ -5,6 +5,11 @@
 #include <string.h>
 #include <stdint.h>
 
+#ifdef _MSC_VER
+#  include <intrin.h>
+#  define __builtin_popcount __popcnt
+#endif
+
 #include "common.hpp"
 
 //Forward declaration required due to CFFI's requirement to have unmangled symbols
