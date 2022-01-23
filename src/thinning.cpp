@@ -9,8 +9,8 @@
 
 //Forward declaration required due to CFFI's requirement to have unmangled symbols
 extern "C" {
-	int guo_hall_thinning(uint8_t* binary_image, size_t width, size_t height);
-	int zhang_suen_thinning(uint8_t* binary_image, size_t width, size_t height);
+	CFFI_DLLEXPORT int guo_hall_thinning(uint8_t* binary_image, size_t width, size_t height);
+	CFFI_DLLEXPORT int zhang_suen_thinning(uint8_t* binary_image, size_t width, size_t height);
 }
 
  
@@ -123,7 +123,7 @@ int zhang_suen_iteration(uint8_t* img, uint8_t* mask, size_t width, size_t heigh
  * Main Guo-Hall thinning function (optimized).
  * See guo_hall_iteration() for more documentation.
  */
-int guo_hall_thinning(uint8_t* binary_image, size_t width, size_t height) {
+CFFI_DLLEXPORT int guo_hall_thinning(uint8_t* binary_image, size_t width, size_t height) {
 	/* return -1 if we can't allocate the memory for the mask, else 0 */
 	uint8_t* mask = (uint8_t*) malloc(width * height);
 	if (mask == NULL) {
@@ -154,7 +154,7 @@ int guo_hall_thinning(uint8_t* binary_image, size_t width, size_t height) {
  * Main Zhang-Suen thinning function (optimized).
  * See guo_hall_thinning() for more documentation.
  */
-int zhang_suen_thinning(uint8_t* binary_image, size_t width, size_t height) {
+CFFI_DLLEXPORT int zhang_suen_thinning(uint8_t* binary_image, size_t width, size_t height) {
 	/* return -1 if we can't allocate the memory for the mask, else 0 */
 	uint8_t* mask = (uint8_t*) malloc(width * height);
 	if (mask == NULL) {
