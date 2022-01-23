@@ -51,7 +51,7 @@ How to install on Windows
 On *Windows*:
 .. code-block:: bash
     pip install cv_algorithms
-Additionally, you need to [install OpenCV](https://techoverflow.net/2022/01/23/how-to-fix-python-modulenotfounderror-no-module-named-cv2-on-windows/) if not already present.
+Additionally, you need to :install OpenCV:`https://techoverflow.net/2022/01/23/how-to-fix-python-modulenotfounderror-no-module-named-cv2-on-windows/` if not already present.
 
 Install the *bleeding-edge* version from GitHub
 .. code-block:: bash
