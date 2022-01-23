@@ -35,7 +35,6 @@ setup(
     platforms="any",
     zip_safe=False,
     version='1.0.0',
-    long_description=io.open("README.md", encoding="utf-8").read(),
     description='Optimized OpenCV extra algorithms for Python',
     url="https://github.com/ulikoehler/cv_algorithms"
 )
