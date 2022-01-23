@@ -12,13 +12,14 @@ from setuptools import find_packages
 
 extra_compile_args = [] if os.name == 'nt' else ["-g", "-O2", "-march=native"]
 extra_link_args = [] if os.name == 'nt' else ["-g"]
+platform_src = ["src/windows.cpp"] if os.name == 'nt' else []
 
 mod_cv_algorithms = Extension('cv_algorithms._cv_algorithms',
                          sources=['src/thinning.cpp',
                                   'src/distance.cpp',
                                   'src/grassfire.cpp',
                                   'src/popcount.cpp',
-                                  'src/neighbours.cpp'],
+                                  'src/neighbours.cpp'] + platform_src,
                          extra_compile_args=extra_compile_args,
                          extra_link_args=extra_link_args)
 
