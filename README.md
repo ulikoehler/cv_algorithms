@@ -7,9 +7,9 @@ available in OpenCV or OpenCV-contrib. This package is intended to be used with 
 Some performance-critical algorithms are written in optimized C code. The C code is accessed using [cffi](https://cffi.readthedocs.io/en/latest/)
 Currently implemented:
 -   Morphological algorithms
-    -   Guo-Hall thinning (C-optimized)
-    -   Zhang-Suen thinning (C-optimized)
-    -   Difference-of-Gaussian transform
+    -   [Guo-Hall thinning (C-optimized)](https://github.com/ulikoehler/cv_algorithms/blob/master/doc/Thinning.md)
+    -   [Zhang-Suen thinning (C-optimized)](https://github.com/ulikoehler/cv_algorithms/blob/master/doc/Thinning.md)
+    -   [Difference-of-Gaussian transform](https://github.com/ulikoehler/cv_algorithms/blob/master/doc/DoG.md)
 -   Algorithms on contours
     -   Masking extraction of convex polygon area from image without rotation
     -   Scale around reference point or center
@@ -18,7 +18,7 @@ Currently implemented:
     -   Filter by min/max area
     -   Sort by area
     -   Create binary contour mask
-    -   Grassfire transform
+    -   [Grassfire transform](https://github.com/ulikoehler/cv_algorithms/blob/master/doc/Grassfire.md)
 -   Colorspace metrics & utilities:
     -   Convert image to any colorspace supported by OpenCV
     -   Extract any channel from any colorspace directly
@@ -32,7 +32,7 @@ Currently implemented:
     -   Remove n percent of image borders
     -   Popcount (number of one bits) for 8, 16, 32 and 64 bit numpy arrays
 
-As [cv2]{.title-ref} represents images as [numpy](http://www.numpy.org/) arrays, most algorithms generically work with numpy arrays.
+As OpenCV's Python bindings (`cv2`) represents images as [numpy](http://www.numpy.org/) arrays, most algorithms generically work with *numpy*1  arrays.
 
 ## Installation
 
