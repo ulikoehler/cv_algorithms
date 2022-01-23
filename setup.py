@@ -35,7 +35,7 @@ setup(
     setup_requires=['nose>=1.0'],
     platforms="any",
     zip_safe=False,
-    version='1.0.1',
+    version='1.0.2',
     description='Optimized OpenCV extra algorithms for Python',
     url="https://github.com/ulikoehler/cv_algorithms"
 )
