@@ -26,7 +26,7 @@ setup(
     name='cv_algorithms',
     license='Apache license 2.0',
     packages=find_packages(exclude=['tests*']),
-    install_requires=['cffi>=0.7'],
+    install_requires=['cffi>=1.10'],
     ext_modules=[mod_cv_algorithms],
     test_suite='nose.collector',
     tests_require=['nose', 'coverage', 'mock', 'rednose', 'nose-parameterized'],
