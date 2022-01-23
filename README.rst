@@ -42,13 +42,23 @@ As `cv2` represents images as `numpy <http://www.numpy.org/>`_ arrays, most algo
 Installation
 ============
 
-.. code-block:: bash
+How to install on Windows
 
+*Install the stable version*
+.. code-block:: bash
+    $ sudo pip install cv_algorithms
+
+On *Windows*:
+.. code-block:: bash
+    pip install cv_algorithms
+Additionally, you need to [install OpenCV](https://techoverflow.net/2022/01/23/how-to-fix-python-modulenotfounderror-no-module-named-cv2-on-windows/) if not already present.
+
+Install the *bleeding-edge* version from GitHub
+.. code-block:: bash
     # Python2
     $ sudo pip install git+https://github.com/ulikoehler/cv_algorithms.git
     # or (Python3)
     $ sudo pip3 install git+https://github.com/ulikoehler/cv_algorithms.git
-
 
 Usage
 =====
