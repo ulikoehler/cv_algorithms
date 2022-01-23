@@ -56,7 +56,7 @@ On *Windows*:
 
 Additionally, you need to `install OpenCV <https://techoverflow.net/2022/01/23/how-to-fix-python-modulenotfounderror-no-module-named-cv2-on-windows/>`_ if not already present.
 
-Install the *bleeding-edge* version from GitHub
+How to install the *bleeding-edge* version from GitHub
 
 .. code-block:: bash
 
