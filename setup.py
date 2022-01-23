@@ -16,6 +16,7 @@ platform_src = ["src/windows.cpp"] if os.name == 'nt' else []
 
 mod_cv_algorithms = Extension('cv_algorithms._cv_algorithms',
                          include_dirs = [os.path.join(os.path.dirname(__file__), "src")],
+                         includes = ['src/common.hpp']
                          sources=['src/thinning.cpp',
                                   'src/distance.cpp',
                                   'src/grassfire.cpp',
@@ -35,7 +36,7 @@ setup(
     setup_requires=['nose>=1.0'],
     platforms="any",
     zip_safe=False,
-    version='1.0.3',
+    version='1.0.4',
     description='Optimized OpenCV extra algorithms for Python',
     url="https://github.com/ulikoehler/cv_algorithms"
 )
