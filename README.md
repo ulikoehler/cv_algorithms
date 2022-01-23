@@ -52,17 +52,15 @@ How to install the *bleeding-edge* version from GitHub
 
 ``` {.sourceCode .bash}
 # Python2
-$ sudo pip install git+https://github.com/ulikoehler/cv_algorithms.git
+sudo pip install git+https://github.com/ulikoehler/cv_algorithms.git
 # or (Python3)
-$ sudo pip3 install git+https://github.com/ulikoehler/cv_algorithms.git
+sudo pip3 install git+https://github.com/ulikoehler/cv_algorithms.git
 ```
 
 ## Usage
 
 [Difference of Gaussian transform documentation & example](https://github.com/ulikoehler/cv_algorithms/blob/master/doc/DoG.md)
-
 [Grassfire transform documentation & example](https://github.com/ulikoehler/cv_algorithms/blob/master/doc/Grassfire.md)
-
 [Thinning documentation & example](https://github.com/ulikoehler/cv_algorithms/blob/master/doc/Thinning.md)
 
 Here\'s a simple usage showcase:
