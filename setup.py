@@ -16,7 +16,7 @@ platform_src = ["src/windows.cpp"] if os.name == 'nt' else []
 
 mod_cv_algorithms = Extension('cv_algorithms._cv_algorithms',
                          include_dirs = [os.path.join(os.path.dirname(__file__), "src")],
-                         includes = ['src/common.hpp']
+                         includes = ['src/common.hpp'],
                          sources=['src/thinning.cpp',
                                   'src/distance.cpp',
                                   'src/grassfire.cpp',
