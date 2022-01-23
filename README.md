@@ -39,7 +39,7 @@ As OpenCV's Python bindings (`cv2`) represents images as [numpy](http://www.nump
 Install the *stable* version
 
 ``` {.sourceCode .bash}
-$ sudo pip install cv_algorithms
+sudo pip install cv_algorithms
 ```
 
 On *Windows*:
