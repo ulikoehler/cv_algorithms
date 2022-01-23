@@ -1,3 +1,4 @@
+#include "common.hpp"
 #include <stdlib.h>
 #include <assert.h>
 #include <stdbool.h>
@@ -6,14 +7,13 @@
 #include <stdint.h>
 #include <algorithm>
 
-#include "common.hpp"
 
 using std::min;
 using std::max;
 
 //Forward declaration required due to CFFI's requirement to have unmangled symbols
 extern "C" {
-    int grassfire(uint32_t* dst, const uint8_t* mask, int width, int height);
+    CFFI_DLLEXPORT int grassfire(uint32_t* dst, const uint8_t* mask, int width, int height);
 }
 
 /**
@@ -21,7 +21,7 @@ extern "C" {
  * Takes a destination counter array (must be zero-initialized)
  * and a binary mask array (checked for != 0).
  */
-int grassfire(uint32_t* dst, const uint8_t* mask, int width, int height) {
+CFFI_DLLEXPORT int grassfire(uint32_t* dst, const uint8_t* mask, int width, int height) {
     // 1st pass
     for (int x = 0; x < width; ++x) {
         for (int y = 0; y < height; ++y) {

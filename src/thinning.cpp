@@ -1,3 +1,4 @@
+#include "common.hpp"
 #include <stdlib.h>
 #include <assert.h>
 #include <stdbool.h>
@@ -5,7 +6,6 @@
 #include <string.h>
 #include <stdint.h>
 
-#include "common.hpp"
 
 //Forward declaration required due to CFFI's requirement to have unmangled symbols
 extern "C" {

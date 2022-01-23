@@ -9,8 +9,8 @@
 // Windows compatibility
 #ifndef CFFI_DLLEXPORT
 #if defined(_MSC_VER)
-#define CFFI_DLLEXPORT  extern __declspec(dllimport)
+#define CFFI_DLLEXPORT __declspec(dllexport)
 #else // !defined(_MSC_VER)
-#define CFFI_DLLEXPORT  extern
+#define CFFI_DLLEXPORT
 #endif // defined(_MSC_VER)
 #endif // ifndef CFFI_DLLEXPORT
