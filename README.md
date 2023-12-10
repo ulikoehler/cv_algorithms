@@ -31,6 +31,7 @@ Currently implemented:
 -   Other algorithms
     -   Remove n percent of image borders
     -   Popcount (number of one bits) for 8, 16, 32 and 64 bit numpy arrays
+    -   Resize an image, maintaining the aspect ratio
 
 As OpenCV's Python bindings (`cv2`) represents images as [numpy](http://www.numpy.org/) arrays, most algorithms generically work with *numpy*1  arrays.
 
