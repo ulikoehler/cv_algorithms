@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import io
-from numpy.testing import assert_approx_equal, assert_allclose, assert_array_equal
-from nose.tools import assert_equal, assert_true, assert_false, assert_greater, assert_less
 import cv2
 import cv_algorithms
 import numpy as np
+import unittest
 
-class TestThinning(object):
+class TestThinning(unittest.TestCase):
     def __init__(self):
         """Read example image"""
         img = cv2.imread("examples/thinning-example.png")
@@ -19,13 +18,13 @@ class TestThinning(object):
         # Check corner conditions for thinning algorithms
         # a) No pixels that were not white before should be white now...
         black_orig = 255 - self.img_thresh
-        assert_false(np.any(np.logical_and(black_orig, result)))
+        self.assertFalse(np.any(np.logical_and(black_orig, result)))
         # b) There are some white pixels, at least for this example image
-        assert_true(np.any(result == 255))
+        self.assertTrue(np.any(result == 255))
         # c) There are more black pixels than before
         orig_numblack = np.sum(self.img_thresh == 0)
         result_numblack = np.sum(result == 0)
-        assert_greater(result_numblack, orig_numblack)
+        self.assertGreater(result_numblack, orig_numblack)
 
     def testGuoHall(self):
         "Test Guo-Hall thinning"
