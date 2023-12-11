@@ -31,7 +31,7 @@ setup(
     install_requires=['cffi>=0.7'],
     ext_modules=[mod_cv_algorithms],
     test_suite='nose.collector',
-    tests_require=['nose', 'coverage', 'mock', 'rednose', 'nose-parameterized'],
+    tests_require=['coverage', 'mock'],
     setup_requires=['nose>=1.0'],
     platforms="any",
     zip_safe=False,
