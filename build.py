@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-from distutils.command.build_ext import build_ext
 import os
+from setuptools import Distribution
 from setuptools import Extension
+from distutils.command.build_ext import build_ext
 
 extra_compile_args = [] if os.name == 'nt' else ["-g", "-O2", "-march=ivybridge"]
 extra_link_args = [] if os.name == 'nt' else ["-g"]
@@ -37,15 +38,25 @@ class ExtBuilder(build_ext):
             raise BuildFailed('Could not compile C extension.')
 
 
-def build(setup_kwargs):
+def build():
     """
     This function is mandatory in order to build the extensions.
     """
-    setup_kwargs.update(
-        {
-            "ext_modules": ext_modules,
-            "cmdclass": {"build_ext": ExtBuilder},
-            "zip_safe": False,
-        }
-    )
-    print(setup_kwargs)
+    distribution = Distribution({"name": "extended", "ext_modules": ext_modules})
+    distribution.package_dir = {"extended": "extended"}
+    
+    cmd = build_ext(distribution)
+    cmd.ensure_finalized()
+    cmd.run()
+
+    #setup_kwargs.update(
+    #    {
+    #        "ext_modules": ext_modules,
+    #        "cmdclass": {"build_ext": ExtBuilder},
+    #        "zip_safe": False,
+    #    }
+    #)
+    #print(setup_kwargs)
+    
+if __name__ == "__main__":
+    build()

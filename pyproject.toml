@@ -5,7 +5,10 @@ description = "Optimized OpenCV extra algorithms for Python"
 authors = ["Uli Köhler <github@techoverflow.net>"]
 license = "Apache License 2.0"
 readme = "README.md"
-build = "build.py"
+
+[tool.poetry.build]
+script = "build.py"
+generate-setup-file = false
 
 [tool.poetry.dependencies]
 python = "^3.5"
