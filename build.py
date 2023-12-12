@@ -58,15 +58,5 @@ def build():
         mode |= (mode & 0o444) >> 2
         os.chmod(relative_extension, mode)
 
-
-    #setup_kwargs.update(
-    #    {
-    #        "ext_modules": ext_modules,
-    #        "cmdclass": {"build_ext": ExtBuilder},
-    #        "zip_safe": False,
-    #    }
-    #)
-    #print(setup_kwargs)
-    
 if __name__ == "__main__":
     build()
