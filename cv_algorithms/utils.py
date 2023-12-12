@@ -4,6 +4,7 @@
 Generic utilities
 """
 import numpy as np
+import math
 
 __all__ = ["spread_to_grayscale"]
 
@@ -33,7 +34,7 @@ def spread_to_grayscale(img, spread_min=True):
     fimg -= np.min(fimg) if spread_min else 0
     fmax = np.max(fimg)
 
-    if fmax == 0.0:
+    if math.fabs(fmax) < 1e-9: # if "fmax == 0"
         # Avoid divide by zero
         return fimg.astype(np.uint8)
 
