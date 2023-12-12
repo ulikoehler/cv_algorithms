@@ -29,7 +29,7 @@ def spread_to_grayscale(img, spread_min=True):
     =======
     A uint8-dtyped image that returns
     """
-    fimg = img.astype(np.float)
+    fimg = img.astype(float)
     fimg -= np.min(fimg) if spread_min else 0
     fmax = np.max(fimg)
 

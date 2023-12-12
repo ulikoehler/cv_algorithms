@@ -56,7 +56,7 @@ def rgb_distance(img, color):
     A numpy float array the same size as img,
     representing the pixel-to-color distances
     """
-    imgfloat = img.astype(np.float)
+    imgfloat = img.astype(float)
     return np.sqrt(np.sum(np.square(imgfloat[:,:] - color), axis=2))
 
 def grayscale_distance(img, value):
