@@ -23,7 +23,7 @@ def pairwise_diff(a, b):
     """
     if len(a.shape) != 1 or len(b.shape) != 1:
         raise ValueError("The arrays must have a 1D shape. Actual shape: {0} and {1}".format(a.shape, b.shape))
-    if (a.nbytes / a.size) != 8. or (b.nbytes / b.size) != 8.:
+    if (a.nbytes // a.size) != 8 or (b.nbytes // b.size) != 8:
         raise ValueError("The arrays need to have 64-bit float elements")
     #  Allocate output array
     out = np.zeros((a.shape[0], b.shape[0]), np.float64)
