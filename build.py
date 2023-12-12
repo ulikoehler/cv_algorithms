@@ -3,7 +3,7 @@ from distutils.command.build_ext import build_ext
 import os
 from setuptools import Extension
 
-extra_compile_args = [] if os.name == 'nt' else ["-g", "-O2", "-march=core2"]
+extra_compile_args = [] if os.name == 'nt' else ["-g", "-O2", "-march=ivybridge"]
 extra_link_args = [] if os.name == 'nt' else ["-g"]
 platform_src = ["src/windows.cpp"] if os.name == 'nt' else []
 
@@ -21,7 +21,6 @@ ext_modules = [
 
 class BuildFailed(Exception):
     pass
-
 
 class ExtBuilder(build_ext):
 
@@ -43,5 +42,10 @@ def build(setup_kwargs):
     This function is mandatory in order to build the extensions.
     """
     setup_kwargs.update(
-        {"ext_modules": ext_modules, "cmdclass": {"build_ext": ExtBuilder}}
+        {
+            "ext_modules": ext_modules,
+            "cmdclass": {"build_ext": ExtBuilder},
+            "zip_safe": False,
+        }
     )
+    print(setup_kwargs)
