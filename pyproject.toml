@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "cv-algorithms"
+version = "1.1.0"
+description = "Optimized OpenCV extra algorithms for Python"
+authors = ["Uli Köhler <github@techoverflow.net>"]
+license = "Apache License 2.0"
+readme = "README.md"
+build = "build.py"
+
+[tool.poetry.dependencies]
+python = "^3.5"
+numpy = "*"
+opencv-python = "*"
+setuptools = "*"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^6.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
