@@ -6,6 +6,11 @@ authors = ["Uli Köhler <github@techoverflow.net>"]
 license = "Apache License 2.0"
 readme = "README.md"
 
+include = [
+    # Include C extension in the package
+    {path = "cv_algorithms/*.so", format = "wheel"},
+]
+
 [tool.poetry.build]
 script = "build.py"
 generate-setup-file = false
@@ -15,6 +20,7 @@ python = "^3.5"
 numpy = "*"
 opencv-python = "*"
 setuptools = "*"
+cffi = ">=0.7"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^6.0.0"
