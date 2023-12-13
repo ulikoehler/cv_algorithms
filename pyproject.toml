@@ -9,7 +9,7 @@ readme = "README.md"
 include = [
     # Include C extension in the package
     {path = "cv_algorithms/*.so", format = "wheel"},
-    {path = "src"},
+    {path = "src", format = "sdist"},
 ]
 
 [tool.poetry.build]
