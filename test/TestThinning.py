@@ -7,12 +7,13 @@ import numpy as np
 import unittest
 
 class TestThinning(unittest.TestCase):
-    def __init__(self):
-        """Read example image"""
+    def setUp(self) -> None:
         img = cv2.imread("examples/thinning-example.png")
         # Convert to grayscale
         self.img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         self.img_thresh = cv2.threshold(self.img, 180, 255, cv2.THRESH_BINARY)[1]
+        
+        return super().setUp()
 
     def _checkThinningImage(self, result):
         # Check corner conditions for thinning algorithms
