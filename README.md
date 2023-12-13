@@ -37,26 +37,24 @@ As OpenCV's Python bindings (`cv2`) represents images as [numpy](http://www.nump
 
 ## Installation
 
-Install the *stable* version
+Install the *stable* version:
 
-``` {.sourceCode .bash}
-sudo pip install cv_algorithms
-```
-
-On *Windows*:
 ``` {.sourceCode .bash}
 pip install cv_algorithms
 ```
-Additionally, you need to [install OpenCV](https://techoverflow.net/2022/01/23/how-to-fix-python-modulenotfounderror-no-module-named-cv2-on-windows/) if not already present.
 
 How to install the *bleeding-edge* version from GitHub
 
 ``` {.sourceCode .bash}
-# Python2
-sudo pip install git+https://github.com/ulikoehler/cv_algorithms.git
-# or (Python3)
-sudo pip3 install git+https://github.com/ulikoehler/cv_algorithms.git
+pip install git+https://github.com/ulikoehler/cv_algorithms.git
 ```
+
+How to *build yourself* - we use [Poetry](https://python-poetry.org/):
+```sh
+poetry build
+```
+
+Potentially, you need to [install OpenCV](https://techoverflow.net/2022/01/23/how-to-fix-python-modulenotfounderror-no-module-named-cv2-on-windows/) if not already present. I recommend first trying to install without that, since modern Python versions will take care of that automatically.
 
 ## Usage
 
