@@ -5,7 +5,7 @@ from setuptools import Distribution
 from setuptools import Extension
 from distutils.command.build_ext import build_ext
 
-extra_compile_args = [] if os.name == 'nt' else ["-g", "-O2", "-march=ivybridge"]
+extra_compile_args = [] if os.name == 'nt' else ["-g", "-O2"]
 extra_link_args = [] if os.name == 'nt' else ["-g"]
 platform_src = ["src/windows.cpp"] if os.name == 'nt' else []
 
